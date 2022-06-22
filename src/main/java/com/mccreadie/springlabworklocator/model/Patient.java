@@ -21,7 +21,7 @@ public class Patient {
     @NotBlank
     private String firstName;
     private String lastName;
-    @NotNull(message = "{tour.date.notnull}")
+    @NotNull(message = "{dateOfBith.date.notnull}")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth;
     @OneToMany(mappedBy = "patient")
