@@ -1,11 +1,7 @@
 package com.mccreadie.springlabworklocator.controller;
 
 import com.mccreadie.springlabworklocator.model.Prosthesis;
-import com.mccreadie.springlabworklocator.service.ClinicianService;
-import com.mccreadie.springlabworklocator.service.LaboratoryService;
-import com.mccreadie.springlabworklocator.service.PatientService;
 import com.mccreadie.springlabworklocator.service.ProsthesisService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,17 +12,11 @@ import java.util.List;
 @Controller
 public class PracticeController {
 
-    @Autowired
-    private LaboratoryService laboratoryService;
+    private final ProsthesisService prosthesisService;
 
-    @Autowired
-    private ClinicianService clinicianService;
-
-    @Autowired
-    private ProsthesisService prosthesisService;
-
-    @Autowired
-    private PatientService patientService;
+    public PracticeController(ProsthesisService prosthesisService) {
+        this.prosthesisService = prosthesisService;
+    }
 
 
     @Transactional

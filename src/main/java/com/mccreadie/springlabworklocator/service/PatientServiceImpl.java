@@ -18,7 +18,8 @@ public class PatientServiceImpl implements PatientService{
 
     @Override
     public Patient getById(int id) {
-        return patientRepository.getOne(id);
+
+        return patientRepository.getReferenceById(id);
     }
 
     @Override

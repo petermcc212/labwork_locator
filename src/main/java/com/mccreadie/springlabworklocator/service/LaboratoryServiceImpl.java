@@ -12,9 +12,12 @@ import java.util.List;
 public class LaboratoryServiceImpl implements LaboratoryService{
 
     
-    @Autowired
-    private LaboratoryRepository laboratoryRepository;
-    
+    private final LaboratoryRepository laboratoryRepository;
+
+    public LaboratoryServiceImpl(LaboratoryRepository laboratoryRepository) {
+        this.laboratoryRepository = laboratoryRepository;
+    }
+
     @Override
     public Laboratory getById(int id) {
 

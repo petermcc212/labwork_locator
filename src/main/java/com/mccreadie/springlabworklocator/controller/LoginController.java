@@ -2,7 +2,6 @@ package com.mccreadie.springlabworklocator.controller;
 
 import com.mccreadie.springlabworklocator.model.User;
 import com.mccreadie.springlabworklocator.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,8 +13,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class LoginController {
 
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+
+    public LoginController(UserService userService) {
+        this.userService = userService;
+    }
 
     @RequestMapping("/login")
     public String showLoginPage(){

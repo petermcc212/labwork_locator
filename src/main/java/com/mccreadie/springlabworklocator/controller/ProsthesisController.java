@@ -8,7 +8,6 @@ import com.mccreadie.springlabworklocator.service.ClinicianService;
 import com.mccreadie.springlabworklocator.service.LaboratoryService;
 import com.mccreadie.springlabworklocator.service.PatientService;
 import com.mccreadie.springlabworklocator.service.ProsthesisService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,17 +22,20 @@ import java.util.List;
 @Controller
 public class ProsthesisController {
 
-    @Autowired
-    private LaboratoryService laboratoryService;
+    private final LaboratoryService laboratoryService;
 
-    @Autowired
-    private ClinicianService clinicianService;
+    private final ClinicianService clinicianService;
 
-    @Autowired
-    private ProsthesisService prosthesisService;
+    private final ProsthesisService prosthesisService;
 
-    @Autowired
-    private PatientService patientService;
+    private final PatientService patientService;
+
+    public ProsthesisController(LaboratoryService laboratoryService, ClinicianService clinicianService, ProsthesisService prosthesisService, PatientService patientService) {
+        this.laboratoryService = laboratoryService;
+        this.clinicianService = clinicianService;
+        this.prosthesisService = prosthesisService;
+        this.patientService = patientService;
+    }
 
     @Transactional
     @GetMapping("/addProsthetic/{patientId}")
@@ -91,7 +93,7 @@ public class ProsthesisController {
         {
             System.out.println(p.getPatient().getFirstName() + p.getPatient().getLastName());
         }
-        return "";
+        return "redirect:/";
     }
 
 
@@ -107,7 +109,7 @@ public class ProsthesisController {
                 System.out.println(p.getPatient().getFirstName() + p.getPatient().getLastName());
             }
         }
-        return "";
+        return "redirect:/";
     }
 
 

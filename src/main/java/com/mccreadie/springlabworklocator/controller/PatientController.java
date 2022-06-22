@@ -7,7 +7,6 @@ import com.mccreadie.springlabworklocator.model.Prosthesis;
 import com.mccreadie.springlabworklocator.service.ClinicianService;
 import com.mccreadie.springlabworklocator.service.PatientService;
 import com.mccreadie.springlabworklocator.service.ProsthesisService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,17 +20,17 @@ import java.util.List;
 @Controller
 public class PatientController {
 
-    @Autowired
-    private PatientService patientService;
+    private final PatientService patientService;
 
-    @Autowired
-    private ClinicianService clinicianService;
+    private final ClinicianService clinicianService;
 
-    @Autowired
-    private ProsthesisService prosthesisService;
+    private final ProsthesisService prosthesisService;
 
-
-
+    public PatientController(PatientService patientService, ClinicianService clinicianService, ProsthesisService prosthesisService) {
+        this.patientService = patientService;
+        this.clinicianService = clinicianService;
+        this.prosthesisService = prosthesisService;
+    }
 
 
     @GetMapping("/addPatient")
@@ -71,7 +70,7 @@ public class PatientController {
     public String processNewPatient(@ModelAttribute Patient patient)
     {
         patientService.save(patient);
-        return"home";
+        return"redirect:/";
     }
 
 

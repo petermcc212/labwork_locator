@@ -1,10 +1,7 @@
 package com.mccreadie.springlabworklocator.controller;
 
 import com.mccreadie.springlabworklocator.model.Prosthesis;
-import com.mccreadie.springlabworklocator.service.ClinicianService;
-import com.mccreadie.springlabworklocator.service.PatientService;
 import com.mccreadie.springlabworklocator.service.ProsthesisService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.SpringVersion;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,14 +12,13 @@ import java.util.List;
 @Controller
 public class HomeController {
 
-	@Autowired
-	private ClinicianService clinicianService;
 
-	@Autowired
-	private PatientService patientService;
 
-	@Autowired
-	private ProsthesisService prosthesisService;
+	private final ProsthesisService prosthesisService;
+
+	public HomeController(ProsthesisService prosthesisService) {
+		this.prosthesisService = prosthesisService;
+	}
 
 
 	@RequestMapping("/")

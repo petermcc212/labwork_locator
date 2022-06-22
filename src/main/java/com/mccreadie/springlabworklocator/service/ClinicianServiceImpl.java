@@ -4,7 +4,6 @@ import com.mccreadie.springlabworklocator.model.Role;
 import com.mccreadie.springlabworklocator.repository.ClinicianRepository;
 import com.mccreadie.springlabworklocator.repository.RoleRepository;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,10 +11,13 @@ import java.util.List;
 @Service
 public class ClinicianServiceImpl implements ClinicianService{
 
-    @Autowired
-    private ClinicianRepository clinicianRepository;
-    @Autowired
-    private RoleRepository roleRepository;
+    private final ClinicianRepository clinicianRepository;
+    private final RoleRepository roleRepository;
+
+    public ClinicianServiceImpl(ClinicianRepository clinicianRepository, RoleRepository roleRepository) {
+        this.clinicianRepository = clinicianRepository;
+        this.roleRepository = roleRepository;
+    }
 
     @Override
     public Clinician getById(int id) {

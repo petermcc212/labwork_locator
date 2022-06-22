@@ -2,7 +2,6 @@ package com.mccreadie.springlabworklocator.controller;
 
 import com.mccreadie.springlabworklocator.model.Laboratory;
 import com.mccreadie.springlabworklocator.service.LaboratoryService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,8 +13,11 @@ import java.util.List;
 @Controller
 public class LaboratoryController {
 
-    @Autowired
-    private LaboratoryService laboratoryService;
+    private final LaboratoryService laboratoryService;
+
+    public LaboratoryController(LaboratoryService laboratoryService) {
+        this.laboratoryService = laboratoryService;
+    }
 
     @GetMapping("/addLaboratory")
     public String newLaboratory(Model model){
