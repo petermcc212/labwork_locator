@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <div th:replace="~{fragments/global-bootstrap :: bootstrap}">Bootstrap</div>
+    <div th:replace="~{fragments/header :: header}">Header</div>
+    <title>List of patients</title>
+</head>
+<body>
+
+<div class="container" >
+    <div class="row">
+        <h1>List of patients</h1>
+    </div>
+
+    <div class="row">
+        <table class="table table-hover" th:if="${!patients.empty}">
+            <thead>
+            <tr>
+                <th scope="col" >FirstName</th>
+                <th scope="col">LastName</th>
+                <th scope="col">Date of birth</th>
+                <th scope="col">Treating Clinician</th>
+
+                <th scope="col">View lab work</th>
+                <th scope="col">Edit patient details</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="patient : ${patients}">
+                <td th:text="${patient.firstName}"></td>
+                <td th:text="${patient.lastName}"></td>
+                <td th:text="${#dates.format(patient.dateOfBirth, 'dd-MM-yyy')}"></td>
+                <td th:text="${patient.clinician.getFirstName()}"></td>
+                <td><a class="btn btn-primary" th:href="@{/viewPatientsLabWork/} + ${patient.id}">View Lab work</a></td>
+                <td><a class="btn btn-primary" th:href="@{/editPatientDetails/} + ${patient.id}">Edit patient details</a></td>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+    <div class="row" th:if="${patients.empty}">
+        <h3>No patients</h3></div>
+    <p>
+        <a th:href="@{/addPatient}" class="btn btn-warning" >Add patient</a>
+    </p>
+    <p>
+        <a th:href="@{/}" class="btn btn-warning" >Back</a>
+    </p>
+
+</div>
+</body>
+</html>

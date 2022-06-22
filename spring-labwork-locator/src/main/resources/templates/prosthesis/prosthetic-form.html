@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New Prosthetic</title>
+    <div th:replace="~{fragments/global-bootstrap :: bootstrap}">Bootstrap</div>
+    <div th:replace="~{fragments/header :: header}">Header</div>
+</head>
+<body>
+<h1>Add a new device</h1>
+<!-- ----------------------- ID ------------------------------------>
+
+<form action="#" th:action="@{/processLabWork}" th:object="${prosthesis}" method="post">
+
+    <div class="form-group">
+        <input type="hidden" class="form=control" th:field="*{id}">
+    </div>
+    <!-- ----------------------- LABORATORY  ------------------------------------>
+
+    <div class="form-group">
+        <label>Laboratory</label>
+        <select class="form-control" th:field="*{laboratory.id}">
+            <option th:each="laboratory : ${laboratories}"
+                    th:value="${laboratory.id}"
+                    th:text="${laboratory.name}">
+            </option>
+        </select>
+    </div>
+    <!-- ----------------------- DENTIST ------------------------------------>
+    <div class="form-group">
+        <input type="hidden" class="form=control" th:field="*{id}">
+    </div>
+    <div class="form-group">
+        <label>Clinician</label>
+        <select class="form-control" th:field="*{clinician.id}">
+            <option th:each="clinician : ${clinicians}"
+                    th:value="${clinician.id}"
+                    th:text="${clinician.firstName}">
+            </option>
+        </select>
+    </div>
+
+    <!-- ----------------------- PATIENT------------------------------------>
+
+    <div class="form-group">
+        <input type="hidden" class="form=control" th:field="*{id}">
+    </div>
+    <div class="form-group">
+        <label>Patient</label>
+        <select class="form-control" th:field="*{patient.id}">
+            <option th:each="patient : ${patient}"
+                    th:value="${patient.id}"
+                    th:text="${patient.firstName}">
+            </option>
+        </select>
+    </div>
+
+    <!-- ----------------------- DATE ------------------------------------>
+    <div class="form-group">
+        <label>Date due</label>
+        <input type="date" class="form-control"  th:field="*{dateDue}">
+    </div>
+
+    <!-- ----------------------- STATUS ------------------------------------>
+    <div class="form-group">
+        <label>Status</label>
+        <select name="status" class="form-control">
+            <option th:each="status : ${T(com.mccreadie.springlabworklocator.model.Prosthesis.Pros_type).values()}"
+                    th:value="${status}"
+                    th:text="${status}"></option>
+        </select>
+    </div>
+
+    <!-- ----------------------- NOTES ------------------------------------>
+
+<!--    <div class="form-group">-->
+<!--        <Label>Notes</Label>-->
+<!--        <input type="text" class="form-control" th:field="*{notes}" >-->
+<!--    </div>-->
+
+
+    <div class="form-group">
+        <Label>Additional notes</Label>
+        <input type="text" class="form-control" th:field="*{notes}" >
+    </div>
+
+
+    <div class="form-row">
+        <div class="col">
+            <input class="btn btn-success" type="submit" value="Submit">
+        </div>
+        <div class="col">
+            <a th:href="@{/}" class="btn btn-warning float-right">Back</a>
+        </div>
+    </div>
+</form>
+</div>
+
+</body>
+</html>

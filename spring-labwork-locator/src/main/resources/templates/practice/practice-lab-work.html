@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <div th:replace="~{fragments/global-bootstrap :: bootstrap}">Bootstrap</div>
+    <div th:replace="~{fragments/header :: header}">Header</div>
+    <title>Practice lab work </title>
+</head>
+<body>
+
+
+<h1>List of practice lab work</h1>
+<table class="table table-hover" th:if="${!allLabWork.empty}">
+    <thead>
+    <tr>
+        <th scope="col">Status</th>
+        <th scope="col">Patient Name</th>
+        <th scope="col">Patient DoB</th>
+        <th scope="col">Creation date</th>
+        <th scope="col">Due date</th>
+        <th scope="col">Laboratory</th>
+        <th scope="col">Clinician</th>
+        <th scope="col">Edit</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${allLabWork}">
+        <td th:text="${item.getStatus()}"></td>
+        <td th:text="${item.patient.firstName} + ' ' + ${item.patient.lastName}"></td>
+        <td th:text="${#dates.format(item.patient.dateOfBirth, 'dd-MM-yyy')}"></td>
+        <td th:text="${#dates.format(item.creationDate, 'dd-MM-yyy')}"></td>
+        <td th:text="${#temporals.format(item.getDateDue(), 'dd-MM-yyyy')}"></td>
+        <td th:text="${item.laboratory.getName()}"></td>
+        <td th:text="${item.clinician.getFirstName()}"></td>
+        <td><a class="btn btn-primary" th:href="@{/editProsthesis/} + ${item.id}">Edit Lab work</a></td>
+
+
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div class="row" th:if="${allLabWork.empty}">
+    <h3>No Lab work added to the system yet</h3></div>
+<div class="row">
+    <a th:href="@{/}" class="btn btn-warning" >Back</a>
+</div>
+
+
+
+
+
+</body>
+</html>

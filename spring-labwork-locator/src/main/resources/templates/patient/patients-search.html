@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <div th:replace="~{fragments/global-bootstrap :: bootstrap}">Bootstrap</div>
+    <div th:replace="~{fragments/header :: header}">Header</div>
+    <title>List of patients</title>
+</head>
+<body>
+
+<div class="container" >
+    <div class="row">
+        <h1>Select patient</h1>
+    </div>
+
+    <div class="row">
+        <table class="table table-hover" th:if="${!patients.empty}">
+            <thead>
+            <tr>
+                <th scope="col" >Select</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Date of birth</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="patient : ${patients}">
+                <td><a class="btn btn-primary" th:href="@{/addProsthetic/} + ${patient.id}">Select</a></td>
+                <td th:text="${patient.firstName}"></td>
+                <td th:text="${patient.lastName}"></td>
+                <td th:text="${#dates.format(patient.dateOfBirth, 'dd-MM-yyy')}"></td>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row" th:if="${patients.empty}">
+        <h3>No patients found</h3></div>
+    <div class="row">
+        <p>
+            <a th:href="@{/addPatientDuringProsthesisCreation}" class="btn btn-warning" >Add patient</a>
+        </p>
+        <p>
+            <a th:href="@{/}" class="btn btn-warning" >Back</a>
+        </p>
+
+    </div>
+</div>
+</body>
+</html>

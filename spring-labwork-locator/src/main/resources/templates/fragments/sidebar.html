@@ -1,0 +1,52 @@
+
+<nav class="sidebar card py-2 mb-4" th:fragment="sidebar">
+    <!--    scripts-->
+    <script src="resources/js/sidebar.js"></script>
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="resources/css/sidebar.css">
+    <! --THYMELEAF -->
+    <html xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:th="http://www.thymeleaf.org"
+          xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+    <ul class="nav flex-column" id="nav_accordion">
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/}"> Home </a>
+        </li>
+        <li class="nav-item has-submenu">
+            <a class="nav-link" href="#"> Labwork  </a>
+            <ul class="submenu collapse">
+                <li><a class="nav-link" th:href="@{/selectPatient}">Add lab work </a></li>
+                <li><a class="nav-link" th:href="@{/viewAllLabWork}">View lab work </a></li>
+            </ul>
+        </li>
+        <li class="nav-item has-submenu">
+            <a class="nav-link" href="#"> Patients  </a>
+            <ul class="submenu collapse">
+                <li><a class="nav-link" th:href="@{/viewPatients}">View Patients </a></li>
+                <li><a class="nav-link" th:href="@{/addPatient}">Add patient </a></li>
+            </ul>
+        </li>
+        <li class="nav-item has-submenu">
+            <a class="nav-link" href="#"> Practice  </a>
+            <ul class="submenu collapse">
+                <li><a class="nav-link" th:href="@{/showClinicians}">View Clinicians </a></li>
+                <li><a class="nav-link" th:href="@{/showLaboratories}">View Labs </a></li>
+                <!--				 <li><a class="nav-link" th:href="@{/editPracticeInformation}">Add patient </a></li>-->
+            </ul>
+        </li>
+        <li class="nav-item">
+            <a sec:authorize="isAnonymous()" th:href="@{/login}"> Login </a>
+            <a sec:authorize="!isAnonymous()" th:href="@{/logout}"> Logout </a>
+            <div class="nav-link"  sec:authorize="!isAnonymous()">
+                <label>User: </label>
+                <label sec:authentication="name" ></label>
+
+            </div>
+        </li>
+
+
+
+    </ul>
+</nav>

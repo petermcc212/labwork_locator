@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Home page</title>
+	<div th:replace="~{fragments/global-bootstrap :: bootstrap}">Bootstrap</div>
+</head>
+
+<body>
+
+
+<div class="container-fluid">
+
+<!--	<div th:replace="~{fragments/sidebar :: sidebar}">Sidebar</div>-->
+
+	<div class="container">
+		<div class="row">
+			<div class="col-12" >
+				<div th:replace="~{fragments/header :: header}">Header</div>
+			</div>
+		</div>
+
+		<section class="jumbotron text-center">
+			<div class="container">
+				<h1>Labwork Locator</h1>
+				<p class="lead text-muted" sec:authorize="!isAnonymous()">Welcome, <span sec:authentication="name">Username</span>  </p>
+				<p class="lead text-muted" sec:authorize="isAnonymous()">Welcome, Please Log in</span>  </p>
+			</div>
+		</section>
+
+
+
+	<!--	------------------------------Overdue lab work ------------------------------  -->
+	<div class="album py-5 bg-light" th:if="${!labworkOverdue.empty}" sec:authorize="!isAnonymous()">
+		<h2>Overdue lab work</h2>
+		<div class="container">
+
+			<div class="row">
+				<div class="col-12">
+
+					<table class="table" th:if="${!labworkOverdue.empty}">
+						<thead>
+						<tr>
+							<th scope="col">Patients name</th>
+							<th scope="col">DoB</th>
+							<th scope="col">Clinician</th>
+							<th scope="col">Notes</th>
+							<th scope="col">Status</th>
+
+						</tr>
+						</thead>
+						<tbody>
+						<tr th:each="item : ${labworkOverdue}">
+							<td th:text="${item.patient.getFirstName() + ' ' + item.patient.getLastName()}"></td>
+							<td th:text="${#dates.format(item.patient.dateOfBirth, 'dd-MM-yyy')}"></td>
+							<td th:text="${item.clinician.getFirstName()}"></td>
+							<td th:text="${item.notes}"></td>
+							<td th:text="${item.status}"></td>
+
+							</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+	<!--	------------------------------Lab work due today ------------------------------  -->
+	<div class="album py-5 bg-light" sec:authorize="!isAnonymous()">
+		<h2>Lab work due today</h2>
+		<div class="container">
+
+			<div class="row">
+				<div class="col-12">
+					<p th:if="${labworkDueToday.empty}">All lab work returned for today</p>
+
+
+					<table class="table" th:if="${!labworkDueToday.empty}">
+						<thead>
+						<tr>
+							<th scope="col">Patients name</th>
+							<th scope="col">DoB</th>
+							<th scope="col">Clinician</th>
+							<th scope="col">Notes</th>
+							<th scope="col">Status</th>
+<!--							<th scope="col">Mark as returned</th>-->
+
+
+
+						</tr>
+						</thead>
+						<tbody>
+						<tr th:each="item : ${labworkDueToday}">
+							<td th:text="${item.patient.getFirstName() + ' ' + item.patient.getLastName()}"></td>
+							<td th:text="${#dates.format(item.patient.dateOfBirth, 'dd-MM-yyy')}"></td>
+							<td th:text="${item.clinician.getFirstName()}"></td>
+							<td th:text="${item.notes}"></td>
+							<td th:text="${item.status}"></td>
+
+
+							</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+<!--	------------------------------Lab work due tomorrow ------------------------------  -->
+	<div class="album py-5 bg-light" sec:authorize="!isAnonymous()">
+		<h2>Lab work due tomorrow</h2>
+		<div class="container">
+
+			<div class="row">
+				<div class="col-12">
+					<p th:if="${labworkDueTomorrow.empty}">All lab work returned for tomorrow</p>
+					<table class="table" th:if="${!labworkDueTomorrow.empty}">
+						<thead>
+						<tr>
+							<th scope="col">Patients name</th>
+							<th scope="col">DoB</th>
+							<th scope="col">Clinician</th>
+							<th scope="col">Notes</th>
+							<th scope="col">Status</th>
+
+						</tr>
+						</thead>
+						<tbody>
+						<tr th:each="item : ${labworkDueTomorrow}">
+							<td th:text="${item.patient.getFirstName() + ' ' + item.patient.getLastName()}"></td>
+							<td th:text="${#dates.format(item.patient.dateOfBirth, 'dd-MM-yyy')}"></td>
+							<td th:text="${item.clinician.getFirstName()}"></td>
+							<td th:text="${item.notes}"></td>
+							<td th:text="${item.status}"></td>
+
+							</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+</div>
+
+
+</body>
+</html>

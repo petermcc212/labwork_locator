@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit the clinician</title>
+  <div th:replace="~{fragments/global-bootstrap :: bootstrap}">Bootstrap</div>
+  <div th:replace="~{fragments/header :: header}">Header</div>
+</head>
+<body>
+<h1>Edit clinician details</h1>
+<form action="#" th:action="@{/processNewClinician}" th:object="${clinician}" method="post">
+
+  <div class="form-group">
+    <input type="hidden" class="form=control" th:field="*{id}">
+  </div>
+
+
+
+  <div class="form-group">
+    <Label>First Name</Label>
+    <input type="text" class="form-control" th:field="*{firstName}" >
+  </div>
+  <div class="form-group">
+    <Label>Last Name</Label>
+    <input type="text" class="form-control" th:field="*{lastName}" >
+  </div>
+  <!-- ----------------------- E-mail ------------------------------------>
+  <div class="form-group">
+    <Label>Email</Label>
+    <input type="text" class="form-control" th:field="*{clinicianEmail}" >
+  </div>
+  <!-- ----------------------- Phone ------------------------------------>
+  <div class="form-group">
+    <Label>Phone number</Label>
+    <input type="text" class="form-control" th:field="*{clinicianPhoneNumber}" >
+  </div>
+
+  <!-- ----------------------- Password ------------------------------------>
+  <div class="form-group">
+    <Label>Password</Label>
+    <input type="password" class="form-control" th:field="*{password}" >
+  </div>
+
+  <!-- ----------------------- SUBMIT ------------------------------------>
+  <div>
+    <input class="btn btn-success" type="submit" value="Submit">
+  </div>
+</form>
+
+</body>
+</html>

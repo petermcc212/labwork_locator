@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <div th:replace="~{fragments/global-bootstrap :: bootstrap}">Bootstrap</div>
+    <title>Patient's lab work </title>
+    <div th:replace="~{fragments/header :: header}">Header</div>
+</head>
+<body>
+
+<h1>List of patient lab work</h1>
+<table class="table table-hover" th:if="${!prostheisList.empty}">
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Creation date</th>
+        <th scope="col">Due date</th>
+        <th scope="col">Laboratory</th>
+        <th scope="col">Clinician</th>
+        <th scope="col">Notes</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${prostheisList}">
+        <td th:text="${item.id}"></td>
+        <td th:text="${#dates.format(item.creationDate, 'yyy-MM-dd')}"></td>
+        <td th:text="${#temporals.format(item.getDateDue(), 'dd-MM-yyyy')}"></td>
+        <td th:text="${item.laboratory.getName()}"></td>
+        <td th:text="${item.clinician.getFirstName()}"></td>
+        <td th:text="${item.notes}"></td>
+
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div class="row" th:if="${prostheisList.empty}">
+    <h3>No Lab work added for this patient</h3></div>
+<div class="row">
+    <a th:href="@{/}" class="btn btn-warning" >Back</a>
+</div>
+
+
+
+
+
+</body>
+</html>

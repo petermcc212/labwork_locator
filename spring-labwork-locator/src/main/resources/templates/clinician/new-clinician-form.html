@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="~{fragments/global-bootstrap :: bootstrap}">Bootstrap</div>
+
+    <meta charset="UTF-8">
+    <title>Add a clinician</title>
+    <div th:replace="~{fragments/header :: header}">Header</div>
+</head>
+<body class="container">
+    <div>
+        <h1>Add a new clinician</h1>
+
+        <form action="#" th:action="@{/processNewClinician}" th:object="${clinician}" method="post">
+
+            <div class="alert alert-danger" role="alert" th:if="${param.differentPasswords}" th:text="${param.differentPasswords}" >
+
+            </div>
+
+            <div class="alert alert-danger" role="alert" th:if="${param.loginExists}" th:text="${param.loginExists}" >
+
+            </div>
+
+            <div class="input-group form-group m-2">
+                <input type="text" class="form-control" name="login" placeholder="Login">
+            </div>
+            <div class="input-group form-group m-2">
+                <input type="password" class="form-control" name="password" placeholder="Password">
+            </div>
+            <div class="input-group form-group m-2">
+                <input type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password">
+            </div>
+            <div class="input-group form-group m-2">
+                <input type="text" class="form-control" name="firstName" placeholder="First Name">
+            </div>
+            <div class="input-group form-group m-2">
+                <input type="text" class="form-control" name="lastName" placeholder="Last Name">
+            </div>
+            <div class="input-group form-group m-2">
+                <input type="text" class="form-control" name="clinicianEmail" placeholder="Email address">
+            </div>
+            <div class="input-group form-group m-2">
+                <input type="text" class="form-control" name="clinicianPhoneNumber" placeholder="Phone Number">
+            </div>
+
+
+
+            <div class="form-group m-3">
+                <input type="submit" value="Sign up" class="btn btn-primary m-2">
+                <a th:href="@{/login}" class="btn btn-warning float-right m-2">Back</a>
+            </div>
+    </div>
+
+
+
+
+
+</body>
+</html>

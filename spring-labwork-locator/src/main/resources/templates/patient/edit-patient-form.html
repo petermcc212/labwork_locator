@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit the patient</title>
+    <div th:replace="~{fragments/global-bootstrap :: bootstrap}">Bootstrap</div>
+    <div th:replace="~{fragments/header :: header}">Header</div>
+</head>
+<body>
+<h1>Edit patient details</h1>
+<form action="#" th:action="@{/processNewPatient}" th:object="${patient}" method="post">
+
+    <div class="form-group">
+        <input type="hidden" class="form=control" th:field="*{id}">
+    </div>
+
+
+
+    <div class="form-group">
+        <Label>First Name</Label>
+        <input type="text" class="form-control" th:field="*{firstName}" >
+    </div>
+    <div class="form-group">
+        <Label>Last Name</Label>
+        <input type="text" class="form-control" th:field="*{lastName}" >
+    </div>
+    <!-- ----------------------- DATE ------------------------------------>
+    <div class="form-group">
+        <label>Date of birth</label>
+        <input type="date" class="form-control"  th:field="*{dateOfBirth}">
+    </div>
+
+
+    <!-- ----------------------- DENTIST ------------------------------------>
+    <div class="form-group">
+        <input type="hidden" class="form=control" th:field="*{id}">
+    </div>
+    <div class="form-group">
+        <label>Clinician</label>
+        <select class="form-control" th:field="*{clinician.id}">
+            <option th:each="clinician : ${clinicians}"
+                    th:value="${clinician.id}"
+                    th:text="${clinician.firstName}">
+            </option>
+        </select>
+    </div>
+
+    <!-- ----------------------- SUBMIT ------------------------------------>
+    <div>
+        <input class="btn btn-success" type="submit" value="Submit">
+    </div>
+</form>
+
+</body>
+</html>

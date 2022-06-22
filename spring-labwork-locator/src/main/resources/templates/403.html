@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>403 page</title>
+    <div th:replace="~{fragments/global-bootstrap :: bootstrap}">Bootstrap</div>
+    <div th:replace="~{fragments/header :: header}">Header</div>
+</head>
+
+<body>
+
+
+<div class="container">
+
+    <h1>You don't have permission to view this page</h1>
+    <div class="row">
+        <a th:href="@{/}" class="btn btn-warning">Back</a>
+    </div>
+</div>
+
+
+</body>
+</html>

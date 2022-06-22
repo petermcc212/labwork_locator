@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+html, body  {
+    /*image available from https://unsplash.com/photos/mCpSF-KnlKY*/
+    background-image: url("../img/signin.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+}
