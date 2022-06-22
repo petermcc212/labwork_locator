@@ -21,7 +21,7 @@ public class LaboratoryServiceImpl implements LaboratoryService{
     @Override
     public Laboratory getById(int id) {
 
-        return laboratoryRepository.getOne(id);
+        return laboratoryRepository.getReferenceById(id);
     }
 
     @Override

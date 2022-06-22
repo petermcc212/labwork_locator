@@ -51,9 +51,7 @@ public class ClinicianController {
     public String viewPatientsLabWork(@PathVariable int clinicianId, Model model)
     {
         Clinician theClinician = clinicianService.getById(clinicianId);
-        System.out.println(theClinician);
         List<Prosthesis> prosthesisList = theClinician.getProstheses();
-        System.out.println(prosthesisList);
         model.addAttribute("clinician", theClinician);
         model.addAttribute("prostheisList", prosthesisList);
         return "clinician/clinicians-lab-work";
@@ -63,7 +61,6 @@ public class ClinicianController {
     @GetMapping("/editClinicianDetails/{clinicianId}")
     public String editClinicianDetails(@PathVariable int clinicianId, Model model){
         Clinician theClinician = clinicianService.getById(clinicianId);
-        String firstName = theClinician.getFirstName();
         model.addAttribute("clinician", theClinician);
         return "clinician/edit-clinician-form";
 

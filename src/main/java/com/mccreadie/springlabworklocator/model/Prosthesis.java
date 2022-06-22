@@ -11,38 +11,25 @@ import java.util.Date;
 @Table(name="prosthesis")
 public class Prosthesis implements Comparable<Prosthesis>{
 
-
-
     public enum Pros_type {
         SENT, RETURNED, COMPLETED, REQUIRES_ATTENTION, VOID
     }
-
     private Pros_type status;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     @ManyToOne
     @JoinColumn(name = "laboratory")
     private Laboratory laboratory;
-
-
     @ManyToOne
     @JoinColumn(name = "clinician")
     private Clinician clinician;
-
     @ManyToOne
     @JoinColumn(name = "patient")
     private Patient patient;
-
     private String notes;
-
-
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateDue;
-
-
     private Date creationDate;
 
     public Prosthesis(){
@@ -52,8 +39,6 @@ public class Prosthesis implements Comparable<Prosthesis>{
 
     @Temporal(TemporalType.DATE)
     public LocalDate getDateDue() {
-        System.out.println("THE DATE DUE IS " + this.dateDue);
-        System.out.println("THE DATE DUE IS " + this.dateDue);
         return dateDue;
     }
 

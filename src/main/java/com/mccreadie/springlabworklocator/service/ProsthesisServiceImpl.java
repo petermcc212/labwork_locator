@@ -22,8 +22,9 @@ public class ProsthesisServiceImpl implements ProsthesisService{
     }
 
     @Override
-    public void save(Prosthesis prosthesis) {
+    public Prosthesis save(Prosthesis prosthesis) {
         prosthesisRepository.save(prosthesis);
+        return prosthesis;
     }
 
     @Override

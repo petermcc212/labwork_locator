@@ -1,6 +1,4 @@
 package com.mccreadie.springlabworklocator.service;
-
-
 import com.mccreadie.springlabworklocator.model.Role;
 import com.mccreadie.springlabworklocator.model.User;
 import com.mccreadie.springlabworklocator.repository.RoleRepository;
@@ -33,7 +31,6 @@ public class UserServiceImpl implements UserService{
 
         Role role = new Role();
         role.setLogin(user.getLogin());
-        System.out.println("AND SO THE ROLE IS " + user.getRole());
         role.setRole(user.getRole());
         roleRepository.save(role);
     }

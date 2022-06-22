@@ -8,7 +8,7 @@ import java.util.List;
 public interface ProsthesisService {
 
     Prosthesis getById(int id);
-    void save(Prosthesis prosthesis);
+    Prosthesis save(Prosthesis prosthesis);
     void delete (int id);
     List<Prosthesis> getAll();
     List<Prosthesis> getAllInOrderOfCreationDate();

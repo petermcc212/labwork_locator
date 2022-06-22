@@ -22,8 +22,6 @@ public class Laboratory {
     private List<Laboratory> laboratoryList;
 
 
-
-
     public int getId() {
         return id;
     }

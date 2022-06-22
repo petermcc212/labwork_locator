@@ -18,8 +18,6 @@ public class Clinician extends User{
     private String clinicianPhoneNumber;
 
 
-
-
     @OneToMany(mappedBy = "clinician")
     private List<Prosthesis> prostheses;
 

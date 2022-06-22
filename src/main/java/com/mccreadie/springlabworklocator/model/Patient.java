@@ -15,23 +15,18 @@ import java.util.List;
 @Indexed
 @Table(name = "patient")
 public class Patient {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-
     @NotBlank
     private String firstName;
-
     private String lastName;
-
     @NotNull(message = "{tour.date.notnull}")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth;
-
     @OneToMany(mappedBy = "patient")
     private List<Prosthesis> prostheses;
+
 
     public Clinician getClinician() {
         return clinician;

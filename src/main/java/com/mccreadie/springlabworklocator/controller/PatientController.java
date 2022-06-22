@@ -96,7 +96,6 @@ public class PatientController {
 
         Patient thePatient = patientService.getById(patientId);
         List<Prosthesis> prosthesisList = thePatient.getProstheses();
-        System.out.println(prosthesisList);
         model.addAttribute("patient", thePatient);
         model.addAttribute("patientlabwork", prosthesisList);
         return "patient/patients-lab-work";

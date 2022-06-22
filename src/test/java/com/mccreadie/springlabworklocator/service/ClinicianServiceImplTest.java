@@ -5,12 +5,15 @@ import com.mccreadie.springlabworklocator.repository.ClinicianRepository;
 import com.mccreadie.springlabworklocator.repository.RoleRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockitoSession;
 
+@ExtendWith(MockitoExtension.class)
 class ClinicianServiceImplTest {
 
     private  ClinicianRepository clinicianRepository;
@@ -40,16 +43,6 @@ class ClinicianServiceImplTest {
 
         assertThat(clinician.getFirstName()).isEqualTo("Peter");
 
-
-
-
     }
 
-    @Test
-    void delete() {
-    }
-
-    @Test
-    void getAll() {
-    }
 }
