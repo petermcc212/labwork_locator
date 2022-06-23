@@ -59,19 +59,26 @@ public class PatientController {
 
 
     @PostMapping(value = "/processNewPatientFromNewProsthesis")
-    public String processNewPatientFromNewProsthesis(@ModelAttribute Patient patient, Model model) {
+    public String processNewPatientFromNewProsthesis(@Valid @ModelAttribute Patient patient,
+                                                     Model model, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+         List<Clinician> clinicians = clinicianService.getAll();
+         model.addAttribute("clinicians", clinicians);
+         return "patient/new-patient-during-pros-creation-form";
+        }
         patientService.save(patient);
         model.addAttribute("patient", patient);
         String patientID = Integer.toString(patient.getId());
-
-                return"redirect:/addProsthetic/" + patientID ;
+        return"redirect:/addProsthetic/" + patientID ;
     }
 
 
     @PostMapping("/processNewPatient")
-    public String processNewPatient(@Valid @ModelAttribute Patient patient, BindingResult bindingResult)
+    public String processNewPatient(@Valid @ModelAttribute Patient patient, BindingResult bindingResult, Model model)
     {
         if(bindingResult.hasErrors()){
+            List<Clinician> clinicians = clinicianService.getAll();
+            model.addAttribute("clinicians", clinicians);
             return "patient/new-patient-form";
         }
         patientService.save(patient);

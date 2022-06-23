@@ -31,15 +31,19 @@
             <div class="input-group form-group m-2">
                 <input type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password">
             </div>
+            <div style="color: red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
             <div class="input-group form-group m-2">
                 <input type="text" class="form-control" name="firstName" placeholder="First Name">
             </div>
+            <div style="color: red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
             <div class="input-group form-group m-2">
                 <input type="text" class="form-control" name="lastName" placeholder="Last Name">
             </div>
+            <div style="color: red" th:if="${#fields.hasErrors('clinicianEmail')}" th:errors="*{clinicianEmail}"></div>
             <div class="input-group form-group m-2">
                 <input type="text" class="form-control" name="clinicianEmail" placeholder="Email address">
             </div>
+            <div style="color: red" th:if="${#fields.hasErrors('clinicianPhoneNumber')}" th:errors="*{clinicianPhoneNumber}"></div>
             <div class="input-group form-group m-2">
                 <input type="text" class="form-control" name="clinicianPhoneNumber" placeholder="Phone Number">
             </div>

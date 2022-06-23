@@ -5,10 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Indexed;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.Date;
 import java.util.List;
 
@@ -21,17 +18,21 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @NotBlank(message = "First name cannot be blank")
-    @Size(max = 50, min = 1, message = "First name length incorrect. Please try again ")
+    @Size(max = 50, min = 1, message = "First name invalid length.")
     @Pattern(regexp = "^[a-zA-Zàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçč" +
-            "šžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$", message = "Unsupported characters in first name. Please re-enter the first name")
+            "šžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$",
+            message = "Unsupported characters in first name.")
     private String firstName;
     @NotBlank(message = "First name cannot be blank")
-    @Size(max = 50, min = 1, message = "Last name length incorrect. Please try again")
+    @Size(max = 50, min = 1, message = "Last name length invalid.")
     @Pattern(regexp = "^[a-zA-Zàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçč" +
-            "šžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$", message = "Unsupported characters in last name. Please re-enter the first name")
+            "šžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$",
+            message = "Unsupported characters in last name.")
     private String lastName;
-    @NotNull(message = "Invalid date of birth. Please check and try again ")
+    @NotNull(message = "Invalid date of birth.")
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Past
     private Date dateOfBirth;
     @OneToMany(mappedBy = "patient")
     private List<Prosthesis> prostheses;

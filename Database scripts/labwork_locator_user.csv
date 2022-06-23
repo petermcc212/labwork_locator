@@ -1,0 +1,6 @@
+User,1,true,admin,{bcrypt}$2a$10$DWkmfVlIa7fTf5LZQ3mneesg/tt8bWRDvl9S.9FM4UxToxe610Bh2,ROLE_ADMIN,,,,
+Clinician,2,true,pedro,{bcrypt}$2a$10$YxbzmpjryUBro4.Gh7tl7eBqRWOxqvXKSMgdbmzcYlWs8pdh04DEy,,pm@petermccreadie.com,07917450638,Peter,McCreadie
+Clinician,3,true,hayley,{bcrypt}$2a$10$ggMuFo6TT2l2cq4ULmWzje1wpBeHkhScfWr7YiXHIUAg6X.ZwCOaS,,hayley@nhs.net,07917450634,Hayley,Foulds
+Clinician,4,true,jordan,{bcrypt}$2a$10$.bdfTBy6zeJEGDhyGz5LTeenJo1xPewY69xttiVLW1kmCKeG2hWTu,,jordan@nationalrail.com,07945784578,Jordan,Matthew
+Clinician,5,true,steward,{bcrypt}$2a$10$.soMXknyYpXyc5Rr4nDJ5eactz5nl.eRVE5b5xWQGEUxwv5aMolVG,,stewart@nhs.net,07894578457,Stewart,Robertson
+Clinician,6,true,andrea,{bcrypt}$2a$10$T73cQp9jfCHHRpHe/773DuPV8WlGrlIU5D6jh1J6oc1zirb/nUjDy,,andrea@nhs.scot,01245784578,Andrea,Burrell

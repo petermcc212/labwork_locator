@@ -2,6 +2,8 @@ package com.mccreadie.springlabworklocator.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -12,9 +14,14 @@ public class Laboratory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotBlank
+    @NotBlank(message = "Please enter laboratory name")
+    @Size(max = 50, min = 1, message = "Laboratory name length invalid")
     private String name;
+    @NotBlank(message = "Please enter laboratory address")
+    @Size(max = 100, min = 1, message = "Laboratory name length invalid")
     private String address;
+    @NotBlank(message = "Please enter laboratory phone number")
+    @Pattern(regexp = "^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$", message = "Invalid phone number")
     private String phoneNumber;
 
     @OneToMany

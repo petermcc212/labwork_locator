@@ -10,14 +10,18 @@ import com.mccreadie.springlabworklocator.service.PatientService;
 import com.mccreadie.springlabworklocator.service.ProsthesisService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class ProsthesisController {
@@ -43,7 +47,7 @@ public class ProsthesisController {
         List<Clinician> clinicians = clinicianService.getAll();
         List<Laboratory> laboratories = laboratoryService.getAll();
         Patient patient = patientService.getById(patientId);
-        System.out.println(patient);
+
         model.addAttribute("patient", patient);
         model.addAttribute("clinicians", clinicians);
         model.addAttribute("prosthesis", new Prosthesis());
@@ -55,7 +59,16 @@ public class ProsthesisController {
 
 
     @PostMapping("/processLabWork")
-    public String addLabWork(@ModelAttribute Prosthesis prosthesis){
+    public String addLabWork(@Valid @ModelAttribute Prosthesis prosthesis, BindingResult bindingResult, Model model){
+        if(bindingResult.hasErrors()){
+            int patientId = prosthesis.getPatient().getId();
+            model.addAttribute("patient", patientService.getById(patientId));
+            model.addAttribute("clinicians", clinicianService.getAll());
+            model.addAttribute("prosthesis", prosthesis);
+            model.addAttribute("laboratories", laboratoryService.getAll());
+
+            return "prosthesis/prosthetic-form";
+        }
         prosthesisService.save(prosthesis);
         return ("redirect:/");
     }

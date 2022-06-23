@@ -1,6 +1,9 @@
 package com.mccreadie.springlabworklocator.model;
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -11,10 +14,23 @@ public class Clinician extends User{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotBlank
+    @NotBlank(message = "First name cannot be blank")
+    @Size(max = 50, min = 1, message = "First name length incorrect.")
+    @Pattern(regexp = "^[a-zA-Zàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçč" +
+            "šžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$",
+            message = "Unsupported characters in first name.")
     private String firstName;
+    @NotBlank(message = "First name cannot be blank")
+    @Size(max = 50, min = 1, message = "Last name length incorrect.")
+    @Pattern(regexp = "^[a-zA-Zàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçč" +
+            "šžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$",
+            message = "Unsupported characters in last name.")
     private String lastName;
+    @NotBlank
+    @Email(message = "Invalid email address")
     private String clinicianEmail;
+    @Pattern(regexp = "^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$", message = "Invalid phone number")
+    @Size(max = 11)
     private String clinicianPhoneNumber;
 
 
