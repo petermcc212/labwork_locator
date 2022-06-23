@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sign in page</title>
-  <link rel="stylesheet" type="text/css" href="resources/css/login.css">
+  <link rel="stylesheet" type="text/css" href="/css/login.css">
   <div th:replace="~{fragments/global-bootstrap :: bootstrap}">Bootstrap</div>
   <div th:replace="~{fragments/header :: header}">Header</div>
 </head>
@@ -16,6 +16,7 @@
     <section class="jumbotron text-center">
       <div class="container">
         <h1>Labwork Locator</h1>
+        <h2>Add a receptionist to the system</h2>
       </div>
     </section>
     <div class="d-flex justify-content-center h-100">
@@ -49,9 +50,7 @@
             <div class="form-group">
               <label>Role</label>
               <select name="role" class="form-control">
-                <option th:each="role : ${T(com.mccreadie.springlabworklocator.model.User.roleType).values()}"
-                        th:value="${role}"
-                        th:text="${role}"/>
+                <option value="receptionist">Receptionist</option>
               </select>
             </div>
 

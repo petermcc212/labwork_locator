@@ -9,12 +9,14 @@ import com.mccreadie.springlabworklocator.service.PatientService;
 import com.mccreadie.springlabworklocator.service.ProsthesisService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -67,8 +69,11 @@ public class PatientController {
 
 
     @PostMapping("/processNewPatient")
-    public String processNewPatient(@ModelAttribute Patient patient)
+    public String processNewPatient(@Valid @ModelAttribute Patient patient, BindingResult bindingResult)
     {
+        if(bindingResult.hasErrors()){
+            return "patient/new-patient-form";
+        }
         patientService.save(patient);
         return"redirect:/";
     }

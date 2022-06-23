@@ -23,7 +23,11 @@ public class ProsthesisServiceImpl implements ProsthesisService{
 
     @Override
     public Prosthesis save(Prosthesis prosthesis) {
-        prosthesisRepository.save(prosthesis);
+        try{
+            prosthesisRepository.save(prosthesis);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return prosthesis;
     }
 

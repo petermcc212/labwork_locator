@@ -18,6 +18,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @Transactional
 @DataJpaTest
+@TestPropertySource(properties = {
+        "spring.jpa.hibernate.ddl-auto=validate"
+})
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class PatientRepositoryTest {
 
@@ -28,6 +31,7 @@ class PatientRepositoryTest {
     @Autowired
     private PatientRepository patientRepository;
 
+
     @Test
     void findByKeyword() {
 
@@ -35,16 +39,24 @@ class PatientRepositoryTest {
         Patient patient = new Patient();
         // First name and date of birth cannot be null
         // and so values are set
-        patient.setFirstName("testFirstName");
+        patient.setFirstName("First");
         patient.setDateOfBirth(new Date());
         patientRepository.save(patient);
+
+        // Create a second patient with a different first name
+        Patient patient1 = new Patient();
+        patient1.setFirstName("Second");
+        patient1.setDateOfBirth(new Date());
+        patientRepository.save(patient1);
+        // Add the patients to a list
         List<Patient> sentPatients = new ArrayList<>();
         sentPatients.add(patient);
+        sentPatients.add(patient1);
 
-        Assert.assertEquals(sentPatients, patientRepository.findByKeyword("tes"));
-
-
-
+        // Perform the query on the repository and save the result
+        List<Patient> returnedList = patientRepository.findByKeyword("First");
+        // Test to ensure only one item is returned by the keyword search of a partial name
+        Assert.assertEquals("One item returned as expected", 1, returnedList.size()  );
 
     }
 }

@@ -1,4 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="header">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="header"
+     xmlns:sec="http://www.w3.org/1999/xhtml">
     <! --THYMELEAF -->
     <html xmlns="http://www.w3.org/1999/xhtml"
           xmlns:th="http://www.thymeleaf.org"
@@ -39,11 +40,19 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="nav-link" th:href="@{/showClinicians}">View Clinicians </a></li>
                         <li><a class="nav-link" th:href="@{/showLaboratories}">View Labs </a></li>
-                        <li><a class="nav-link" th:href="@{/addClinician}">Add clinician </a></li>
-                        <li><a class="nav-link" th:href="@{/addReceptionist}">Add a receptionist </a></li>
-                        <li><a class="nav-link" th:href="@{/addAdministrator}">Add an administrator </a></li>
-
                     </ul>
+
+                </li>
+                <li class="nav-item dropdown" sec:authorize="hasRole('ADMIN')">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Register user
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                        <li><a class="nav-link" th:href="@{/addClinician}">Add clinician </a></li>
+                        <li><a class="nav-link" th:href="@{/addReceptionist}">Add receptionist </a></li>
+                        <li><a class="nav-link" th:href="@{/addAdministrator}">Add administrator </a></li>
+                    </ul>
+
                 </li>
                 <li class="nav-item">
 <!--                    <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>-->

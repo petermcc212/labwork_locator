@@ -35,6 +35,7 @@ public class ClinicianController {
     @PostMapping("/processNewClinician")
     public String showClinicianData(@ModelAttribute Clinician clinician){
         clinicianService.createNewClinician(clinician);
+
         return "redirect:showClinicians";
     }
 

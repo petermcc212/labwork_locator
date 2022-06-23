@@ -28,7 +28,12 @@ public class ClinicianServiceImpl implements ClinicianService{
     public void createNewClinician(Clinician clinician) {
         clinician.setEnabled(true);
         clinician.setPassword(PasswordEncoderFactories.createDelegatingPasswordEncoder().encode(clinician.getPassword()));
-        clinicianRepository.save(clinician);
+        try{
+            clinicianRepository.save(clinician);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
 
         Role role = new Role();
         role.setLogin(clinician.getLogin());

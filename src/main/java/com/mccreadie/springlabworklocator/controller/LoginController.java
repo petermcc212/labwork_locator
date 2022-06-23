@@ -30,18 +30,18 @@ public class LoginController {
         return "403";
     }
 
-    @RequestMapping("/signup")
+    @RequestMapping("/addAdministrator")
     public String signup(Model model)
     {
         model.addAttribute("user", new User());
-        return ("security/form-signup");
+        return ("security/form-signup-admin");
     }
 
     @RequestMapping("/addReceptionist")
     public String addReceptionist(Model model)
     {
         model.addAttribute("user", new User());
-        return ("security/form-signup");
+        return ("security/form-signup-receptionist");
     }
 
     @PostMapping("processSignup")

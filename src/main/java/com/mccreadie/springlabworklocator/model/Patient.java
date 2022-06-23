@@ -7,6 +7,8 @@ import org.springframework.stereotype.Indexed;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
 
@@ -18,14 +20,27 @@ public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @NotBlank
+    @NotBlank(message = "First name cannot be blank")
+    @Size(max = 50, min = 1, message = "First name length incorrect. Please try again ")
+    @Pattern(regexp = "^[a-zA-Zàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçč" +
+            "šžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$", message = "Unsupported characters in first name. Please re-enter the first name")
     private String firstName;
+    @NotBlank(message = "First name cannot be blank")
+    @Size(max = 50, min = 1, message = "Last name length incorrect. Please try again")
+    @Pattern(regexp = "^[a-zA-Zàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçč" +
+            "šžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$", message = "Unsupported characters in last name. Please re-enter the first name")
     private String lastName;
-    @NotNull(message = "{dateOfBith.date.notnull}")
+    @NotNull(message = "Invalid date of birth. Please check and try again ")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth;
     @OneToMany(mappedBy = "patient")
     private List<Prosthesis> prostheses;
+
+
+    @ManyToOne
+    private Clinician clinician;
+
+
 
 
     public Clinician getClinician() {
@@ -36,8 +51,6 @@ public class Patient {
         this.clinician = clinician;
     }
 
-    @ManyToOne
-    private Clinician clinician;
 
     public int getId() {
         return id;

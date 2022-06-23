@@ -1,7 +1,6 @@
 package com.mccreadie.springlabworklocator.repository;
 
 
-import com.mccreadie.springlabworklocator.model.Patient;
 import com.mccreadie.springlabworklocator.model.Prosthesis;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -14,7 +13,16 @@ import java.util.List;
 @Repository
 public interface ProsthesisRepository extends JpaRepository<Prosthesis, Integer> {
 
-// enum values for status: 0=sent, 1=returned, 2=completed, 3=requires_attention, 4=void
+    /*
+    Status is related to the current status of the prosthetic based on the enum value in the Prosthesis class.
+    Status 0 = SENT
+    Status 1 = RETURNED
+    Status 2 = COMPLETED
+    Status 3 = REQUIRES_ATTENTION
+    Status 4 = VOID
+
+     */
+
 
     //Lab work due today
 //    @Query(value = "select * from prosthesis p where p.dateDue = CURRENT_DATE ", nativeQuery = true)
@@ -30,10 +38,5 @@ public interface ProsthesisRepository extends JpaRepository<Prosthesis, Integer>
     @Query("select p from Prosthesis p where p.dateDue< :todaysDate and not (p.status = 1 or p.status = 2 or p.status = 4)")
     List<Prosthesis> findOverdueWork(@Param("todaysDate") LocalDate todaysDate);
 
-
-
-
-    @Query(value = "select * from patient p where p.firstName like %:keyword% or p.lastName like %:keyword%", nativeQuery = true)
-    List<Patient> findByKeyword(@Param("keyword") String keyword);
 
 }
