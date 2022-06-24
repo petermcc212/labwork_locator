@@ -33,6 +33,8 @@ public class Clinician extends User{
     @Size(max = 11)
     private String clinicianPhoneNumber;
 
+    private String fullName;
+
 
     @OneToMany(mappedBy = "clinician")
     private List<Prosthesis> prostheses;
@@ -97,5 +99,13 @@ public class Clinician extends User{
         this.prostheses = prostheses;
     }
 
+    public String getFullName() {
+        try{
+            fullName = this.firstName + " " + this.lastName;
+        }catch(NullPointerException e){
+            e.printStackTrace();
+        }
+        return fullName;
+    }
 
 }

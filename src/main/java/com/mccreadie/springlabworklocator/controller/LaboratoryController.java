@@ -42,11 +42,11 @@ public class LaboratoryController {
         return "redirect:showLaboratories";
     }
 
-    @GetMapping("/showLaboratories")
+    @GetMapping("/showAllLaboratories")
     public String getLaboratories(Model model){
         List<Laboratory> laboratories = laboratoryService.getAll();
         model.addAttribute("laboratories", laboratories);
-        return "laboratories/laboratories";
+        return "laboratories/view-all-laboratories";
     }
 
 

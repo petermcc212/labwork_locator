@@ -90,7 +90,7 @@ public class PatientController {
     public String selectPatient(Model model){
         List<Patient> patients = patientService.getAll();
         model.addAttribute("patients", patients);
-        return "patient/patient-list";
+        return "patient/list-of-all-patients";
     }
 
 
@@ -98,7 +98,7 @@ public class PatientController {
     public String getPatients(Model model){
         List<Patient> patients = patientService.getAll();
         model.addAttribute("patients", patients);
-        return "patient/patients-summary";
+        return "patient/list-of-all-patients";
     }
 
     @Transactional
@@ -120,8 +120,18 @@ public class PatientController {
         System.out.println(thePatient);
         model.addAttribute("patient", thePatient);
         model.addAttribute("clinicians", clinicianService.getAll());
-        return "patient/edit-patient-form";
+        return "patient/editPatientDetails";
     }
+
+
+    @GetMapping("/viewPatientProfile/{patientId}")
+    public String viewPatientProfile(@PathVariable int patientId, Model model){
+        Patient thePatient = patientService.getById(patientId);
+        model.addAttribute("patient", thePatient);
+        model.addAttribute("clinicians", clinicianService.getAll());
+        return "patient/patientProfile";
+    }
+
 
     @GetMapping("/search")
     public String search(Model model,  String keyword){
