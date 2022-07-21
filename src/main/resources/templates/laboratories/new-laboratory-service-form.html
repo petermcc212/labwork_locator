@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New Prosthetic</title>
+    <div th:replace="~{fragments/global-bootstrap :: bootstrap}">Bootstrap</div>
+    <div th:replace="~{fragments/header :: header}">Header</div>
+</head>
+<body>
+<h1>New laboratory service</h1>
+<!-- ----------------------- ID ------------------------------------>
+
+<form action="#" th:action="@{/processNewService}" th:object="${labService}" method="post">
+
+    <div class="form-group">
+        <input type="hidden" class="form=control" th:field="*{id}">
+    </div>
+    <!-- ----------------------- LABORATORY  ------------------------------------>
+
+    <div class="form-group">
+        <label>Laboratory</label>
+        <select class="form-control" th:field="*{laboratory.id}">
+            <option th:each="laboratory : ${laboratory}"
+                    th:value="${laboratory.id}"
+                    th:text="${laboratory.name}">
+            </option>
+        </select>
+    </div>
+
+    <!-- ----------------------- NAME  ------------------------------------>
+    <div class="form-group">
+        <Label>Service description</Label>
+        <input type="text" class="form-control" th:field="*{name}" >
+    </div>
+
+    <!-- ----------------------- TURNAROUND TIME  ------------------------------------>
+    <div class="form-group">
+        <Label>Turnaround time</Label>
+        <input type="number" class="form-control" th:field="*{turnaroundPeriod}" >
+    </div>
+
+    <div class="form-row">
+        <div class="col">
+            <input class="btn btn-success" type="submit" value="Submit">
+        </div>
+        <div class="col">
+            <a th:href="@{/}" class="btn btn-warning float-right">Back</a>
+        </div>
+    </div>
+</form>
+</div>
+
+
+
+
+</body>
+</html>
