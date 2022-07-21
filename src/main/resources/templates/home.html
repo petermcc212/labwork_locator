@@ -34,36 +34,41 @@
 
 
 	<!--	------------------------------Overdue lab work ------------------------------  -->
-	<div class="album py-5 bg-light" th:if="${!labworkOverdue.empty}" sec:authorize="!isAnonymous()">
-		<h2>Overdue lab work</h2>
-		<div class="container">
 
-			<div class="row">
-				<div class="col-12">
+		<div class="album py-5 bg-light" sec:authorize="!isAnonymous()">
+			<h2>Overdue</h2>
+			<div class="container">
 
-					<table class="table" th:if="${!labworkOverdue.empty}">
-						<thead>
-						<tr>
-							<th scope="col">Patients name</th>
-							<th scope="col">DoB</th>
-							<th scope="col">Clinician</th>
-							<th scope="col">Notes</th>
-							<th scope="col">Status</th>
+				<div class="row">
+					<div class="col-12">
+						<p th:if="${labworkOverdue.empty}">Nothing overdue</p>
 
-						</tr>
-						</thead>
-						<tbody>
-						<tr th:each="item : ${labworkOverdue}">
-							<td th:text="${item.patient.getFirstName() + ' ' + item.patient.getLastName()}"></td>
-							<td th:text="${#dates.format(item.patient.dateOfBirth, 'dd-MM-yyy')}"></td>
-							<td th:text="${item.clinician.getFirstName()}"></td>
-							<td th:text="${item.notes}"></td>
-							<td th:text="${item.status}"></td>
+						<p th:if="${!labworkOverdue.empty}">
+						<table class="table" th:if="${!labworkOverdue.empty}">
+							<thead>
+							<tr>
+								<th scope="col">Patients name</th>
+								<th scope="col">Date due</th>
+								<th scope="col">Clinician</th>
+								<th scope="col">Notes</th>
+								<th scope="col">Status</th>
 
-							</td>
-						</tr>
-						</tbody>
-					</table>
+							</tr>
+							</thead>
+							<tbody>
+							<tr th:each="item : ${labworkOverdue}">
+								<td th:text="${item.patient.getFirstName() + ' ' + item.patient.getLastName()}"></td>
+								<td th:text="${#temporals.format(item.dateDue, 'dd-MM-yyyy')}"></td>
+								<td th:text="${item.clinician.getFirstName()}"></td>
+								<td th:text="${item.notes}"></td>
+								<td th:text="${item.status}"></td>
+
+								</td>
+							</tr>
+							</tbody>
+						</table>
+						</p>
+
 				</div>
 			</div>
 		</div>
@@ -88,7 +93,7 @@
 						<thead>
 						<tr>
 							<th scope="col">Patients name</th>
-							<th scope="col">DoB</th>
+							<th scope="col">Date due</th>
 							<th scope="col">Clinician</th>
 							<th scope="col">Notes</th>
 							<th scope="col">Status</th>
@@ -101,7 +106,7 @@
 						<tbody>
 						<tr th:each="item : ${labworkDueToday}">
 							<td th:text="${item.patient.getFirstName() + ' ' + item.patient.getLastName()}"></td>
-							<td th:text="${#dates.format(item.patient.dateOfBirth, 'dd-MM-yyy')}"></td>
+							<td th:text="${#temporals.format(item.dateDue, 'dd-MM-yyyy')}"></td>
 							<td th:text="${item.clinician.getFirstName()}"></td>
 							<td th:text="${item.notes}"></td>
 							<td th:text="${item.status}"></td>
@@ -129,7 +134,7 @@
 						<thead>
 						<tr>
 							<th scope="col">Patients name</th>
-							<th scope="col">DoB</th>
+							<th scope="col">Date due</th>
 							<th scope="col">Clinician</th>
 							<th scope="col">Notes</th>
 							<th scope="col">Status</th>
@@ -139,7 +144,7 @@
 						<tbody>
 						<tr th:each="item : ${labworkDueTomorrow}">
 							<td th:text="${item.patient.getFirstName() + ' ' + item.patient.getLastName()}"></td>
-							<td th:text="${#dates.format(item.patient.dateOfBirth, 'dd-MM-yyy')}"></td>
+							<td th:text="${#temporals.format(item.dateDue, 'dd-MM-yyyy')}"></td>
 							<td th:text="${item.clinician.getFirstName()}"></td>
 							<td th:text="${item.notes}"></td>
 							<td th:text="${item.status}"></td>

@@ -22,6 +22,7 @@
                 <td>Name</td>
                 <td>Address</td>
                 <td>Phone number</td>
+                <td>Edit details </td>
 
             </thead>
             <tbody>
@@ -29,6 +30,7 @@
                 <td th:text="${lab.name}"></td>
                 <td th:text="${lab.address}"></td>
                 <td th:text="${lab.phoneNumber}"></td>
+                <td><a class="btn btn-primary" th:href="@{/editLaboratory/} + ${lab.id}">Edit</a></td>
             </tr>
             </tbody>
         </table>

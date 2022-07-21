@@ -3,10 +3,7 @@ package com.mccreadie.springlabworklocator.model;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.Future;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
@@ -33,7 +30,7 @@ public class Prosthesis implements Comparable<Prosthesis>{
     private Patient patient;
     private String notes;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Future
+    @FutureOrPresent
     @NotNull
     private LocalDate dateDue;
     private Date creationDate;

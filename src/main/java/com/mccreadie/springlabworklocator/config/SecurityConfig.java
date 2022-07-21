@@ -36,22 +36,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/login")
-                    .permitAll()
-                .antMatchers("/", "/showClinicians", "/viewCliniciansLabWork/*", "/showAllLaboratories",
-                                        "/selectPatient", "/viewPatients", "/viewPatientsLabWork/*", "/search",
-                                        "/viewAllLabWork", "/processLabWork", "/editProsthesis/*", "/labWorkDueTomorrow",
-                                        "/labWorkDueToday", "/editPatientDetails/*", "/viewPatient" +
-                                "Profile/*")
-                .hasAnyRole("ADMIN", "CLINICIAN", "RECEPTIONIST")
-                .antMatchers("/addProsthetic/*", "/addPatient", "/addPatientDuringProsthesisCreation",
-                                        "/processNewPatientFromNewProsthesis", "/processNewPatient")
-                    .hasAnyRole("CLINICIAN", "ADMIN")
-                .antMatchers("/addClinician", "/processNewClinician", "/editClinicianDetails/*", "/addLaboratory",
-                                        "/processNewLaboratory", "/signup", "/processSignup",
-                        "/addReceptionist", "/addAdministrator")
-                    .hasAnyRole("ADMIN")
-                .anyRequest().denyAll()
+//                .antMatchers("/login")
+//                    .permitAll()
+//                .antMatchers("/", "/showClinicians", "/viewCliniciansLabWork/*", "/showAllLaboratories",
+//                                        "/selectPatient", "/viewPatients", "/viewPatientsLabWork/*", "/search",
+//                                        "/viewAllLabWork", "/processLabWork", "/editProsthesis/*", "/labWorkDueTomorrow",
+//                                        "/labWorkDueToday", "/editPatientDetails/*", "/viewPatient" +
+//                                "Profile/*")
+//                .hasAnyRole("ADMIN", "CLINICIAN", "RECEPTIONIST")
+//                .antMatchers("/addProsthetic/*", "/addPatient", "/addPatientDuringProsthesisCreation",
+//                                        "/processNewPatientFromNewProsthesis", "/processNewPatient")
+//                    .hasAnyRole("CLINICIAN", "ADMIN")
+//                .antMatchers("/addClinician", "/processNewClinician", "/editClinicianDetails/*", "/addLaboratory",
+//                                        "/processNewLaboratory", "/signup", "/processSignup",
+//                        "/addReceptionist", "/addAdministrator", "editLaboratory/*")
+//                    .hasAnyRole("ADMIN")
+//                .anyRequest().denyAll()
                 .and()
                     .formLogin()
                         .loginPage("/login")

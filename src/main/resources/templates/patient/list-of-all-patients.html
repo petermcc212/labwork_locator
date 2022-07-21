@@ -31,8 +31,8 @@
                 <td th:text="${patient.firstName}"></td>
                 <td th:text="${patient.lastName}"></td>
                 <td th:text="${#dates.format(patient.dateOfBirth, 'dd-MM-yyy')}"></td>
-                <td><a class="btn btn-primary" th:href="@{/addProsthetic/} + ${patient.id}">Select</a></td>
-                <td><a class="btn btn-primary" th:href="@{/viewPatientProfile/} + ${patient.id}">Select</a></td>
+                <td><a class="btn btn-primary" th:href="@{/addProsthetic/} + ${patient.id}">Add</a></td>
+                <td><a class="btn btn-primary" th:href="@{/viewPatientProfile/} + ${patient.id}">Profile</a></td>
 
                 </td>
             </tr>

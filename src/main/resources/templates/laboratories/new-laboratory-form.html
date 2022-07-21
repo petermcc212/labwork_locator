@@ -5,7 +5,7 @@
     <div th:replace="~{fragments/global-bootstrap :: bootstrap}">Bootstrap</div>
     <div th:replace="~{fragments/header :: header}">Header</div>
     <meta charset="UTF-8">
-    <title>Add a clinician</title>
+    <title>Add a laboratory</title>
 </head>
 <body class="container">
 
@@ -31,6 +31,7 @@
                 <div style="color: red" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></div>
                 <input type="text" class="form-control" th:field="*{phoneNumber}" >
             </div>
+
             <div>
                 <input class="btn btn-success" type="submit" value="Submit">
             </div>

@@ -4,7 +4,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "laboratory")
@@ -24,9 +26,6 @@ public class Laboratory {
     @Pattern(regexp = "^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$", message = "Invalid phone number")
     private String phoneNumber;
 
-    @OneToMany
-    @JoinColumn(name = "laboratory")
-    private List<Laboratory> laboratoryList;
 
 
     public int getId() {
@@ -59,4 +58,5 @@ public class Laboratory {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
 }

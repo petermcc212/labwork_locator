@@ -7,8 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -29,7 +31,7 @@ public class LaboratoryController {
     }
 
     @PostMapping("/processNewLaboratory")
-    public String showLaboratoryData(@Valid @ModelAttribute Laboratory laboratory, BindingResult bindingResult)
+    public String showLaboratoryData(@Valid @ModelAttribute Laboratory laboratory, BindingResult bindingResult, Model model)
     {
         if(bindingResult.hasErrors()){
             return"laboratories/new-laboratory-form";
@@ -39,8 +41,14 @@ public class LaboratoryController {
         }catch (Exception e){
             e.printStackTrace();
         }
-        return "redirect:showLaboratories";
+        List<Laboratory> laboratories = laboratoryService.getAll();
+        model.addAttribute("laboratories", laboratories);
+        return "redirect:showAllLaboratories";
     }
+
+
+
+
 
     @GetMapping("/showAllLaboratories")
     public String getLaboratories(Model model){
@@ -48,6 +56,20 @@ public class LaboratoryController {
         model.addAttribute("laboratories", laboratories);
         return "laboratories/view-all-laboratories";
     }
+
+    @Transactional
+    @GetMapping("/editLaboratory/{laboratoryId}")
+    public String editLaboratoryDetails(@PathVariable int laboratoryId, Model model){
+        Laboratory theLaboratory = laboratoryService.getById(laboratoryId);
+        model.addAttribute(theLaboratory);
+        List<Laboratory> laboratories = laboratoryService.getAll();
+        model.addAttribute("laboratories", laboratories);
+        return "laboratories/edit-laboratory-form";
+
+    }
+
+
+
 
 
 
