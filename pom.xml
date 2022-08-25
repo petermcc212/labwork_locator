@@ -78,6 +78,12 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.webflow</groupId>
+            <artifactId>spring-webflow</artifactId>
+            <version>2.5.1.RELEASE</version>
+        </dependency>
+
 
     </dependencies>
 

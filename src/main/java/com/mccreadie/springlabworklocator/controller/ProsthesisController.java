@@ -18,10 +18,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class ProsthesisController {

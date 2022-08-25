@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en-GB">
 <head>
     <meta charset="UTF-8">
     <div th:replace="~{fragments/global-bootstrap :: bootstrap}">Bootstrap</div>
-    <div th:replace="~{fragments/header :: header}">Header</div>
+
     <title>List of patients</title>
 </head>
 <body>
+<div class="container">
+    <div class="row">
+        <div class="col-12" >
+            <div th:replace="~{fragments/header :: header}">Header</div>
+        </div>
+    </div>
 
 <div class="container" >
     <div class="row">
@@ -34,7 +41,6 @@
                 <td><a class="btn btn-primary" th:href="@{/addProsthetic/} + ${patient.id}">Add</a></td>
                 <td><a class="btn btn-primary" th:href="@{/viewPatientProfile/} + ${patient.id}">Profile</a></td>
 
-                </td>
             </tr>
             </tbody>
         </table>
@@ -51,5 +57,7 @@
 
     </div>
 </div>
+</div>
+
 </body>
 </html>

@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en-GB">
 <head>
     <meta charset="UTF-8">
     <div th:replace="~{fragments/global-bootstrap :: bootstrap}">Bootstrap</div>
     <title>Laboratories</title>
-    <div th:replace="~{fragments/header :: header}">Header</div>
 </head>
 <body>
 
 
 <div class="container" >
+        <div class="row">
+            <div class="col-12" >
+                <div th:replace="~{fragments/header :: header}">Header</div>
+            </div>
+        </div>
+
     <div class="row">
         <h1>List of laboratories</h1>
     </div>

@@ -1,14 +1,23 @@
 <!DOCTYPE html>
+
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en-GB">
 <head>
     <div th:replace="~{fragments/global-bootstrap :: bootstrap}">Bootstrap</div>
 
     <meta charset="UTF-8">
     <title>Add a clinician</title>
-    <div th:replace="~{fragments/header :: header}">Header</div>
+    <title>New clinician</title>
 </head>
 <body class="container">
+
+    <div class="row">
+        <div class="col-12" >
+            <div th:replace="~{fragments/header :: header}">Header</div>
+        </div>
+    </div>
+
     <div>
         <h1>Add a new clinician</h1>
 

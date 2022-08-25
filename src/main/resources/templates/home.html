@@ -1,7 +1,9 @@
 <!DOCTYPE html>
+
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:th="http://www.thymeleaf.org"
-	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	  lang="en-GB">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,7 +35,7 @@
 
 
 
-	<!--	------------------------------Overdue lab work ------------------------------  -->
+	<!--	 Overdue lab work    -->
 
 		<div class="album py-5 bg-light" sec:authorize="!isAnonymous()">
 			<h2>Overdue</h2>
@@ -63,12 +65,9 @@
 								<td th:text="${item.notes}"></td>
 								<td th:text="${item.status}"></td>
 
-								</td>
 							</tr>
 							</tbody>
 						</table>
-						</p>
-
 				</div>
 			</div>
 		</div>
@@ -79,7 +78,7 @@
 
 
 
-	<!--	------------------------------Lab work due today ------------------------------  -->
+	<!--	 Lab work due today  -->
 	<div class="album py-5 bg-light" sec:authorize="!isAnonymous()">
 		<h2>Lab work due today</h2>
 		<div class="container">
@@ -110,9 +109,6 @@
 							<td th:text="${item.clinician.getFirstName()}"></td>
 							<td th:text="${item.notes}"></td>
 							<td th:text="${item.status}"></td>
-
-
-							</td>
 						</tr>
 						</tbody>
 					</table>
@@ -122,7 +118,7 @@
 	</div>
 
 
-<!--	------------------------------Lab work due tomorrow ------------------------------  -->
+<!--	 Lab work due tomorrow   -->
 	<div class="album py-5 bg-light" sec:authorize="!isAnonymous()">
 		<h2>Lab work due tomorrow</h2>
 		<div class="container">
@@ -138,7 +134,6 @@
 							<th scope="col">Clinician</th>
 							<th scope="col">Notes</th>
 							<th scope="col">Status</th>
-
 						</tr>
 						</thead>
 						<tbody>
@@ -148,8 +143,6 @@
 							<td th:text="${item.clinician.getFirstName()}"></td>
 							<td th:text="${item.notes}"></td>
 							<td th:text="${item.status}"></td>
-
-							</td>
 						</tr>
 						</tbody>
 					</table>

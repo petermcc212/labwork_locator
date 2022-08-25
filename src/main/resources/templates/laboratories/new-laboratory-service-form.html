@@ -1,26 +1,34 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en-GB">
 <head>
     <meta charset="UTF-8">
     <title>New Prosthetic</title>
     <div th:replace="~{fragments/global-bootstrap :: bootstrap}">Bootstrap</div>
-    <div th:replace="~{fragments/header :: header}">Header</div>
+    <title>New laboratory</title>
 </head>
 <body>
+<div class="container">
+    <div class="row">
+        <div class="col-12" >
+            <div th:replace="~{fragments/header :: header}">Header</div>
+        </div>
+    </div>
+</div>
 <h1>New laboratory service</h1>
-<!-- ----------------------- ID ------------------------------------>
+<!--ID-->
 
 <form action="#" th:action="@{/processNewService}" th:object="${labService}" method="post">
 
     <div class="form-group">
         <input type="hidden" class="form=control" th:field="*{id}">
     </div>
-    <!-- ----------------------- LABORATORY  ------------------------------------>
+    <!--Laboratory -->
 
     <div class="form-group">
-        <label>Laboratory</label>
-        <select class="form-control" th:field="*{laboratory.id}">
+        <label for="laboratory">Laboratory</label>
+        <select id="laboratory" class="form-control" th:field="*{laboratory.id}">
             <option th:each="laboratory : ${laboratory}"
                     th:value="${laboratory.id}"
                     th:text="${laboratory.name}">
@@ -30,14 +38,14 @@
 
     <!-- ----------------------- NAME  ------------------------------------>
     <div class="form-group">
-        <Label>Service description</Label>
-        <input type="text" class="form-control" th:field="*{name}" >
+        <Label for="name">Service description</Label>
+        <input id="name" type="text" class="form-control" th:field="*{name}" >
     </div>
 
     <!-- ----------------------- TURNAROUND TIME  ------------------------------------>
     <div class="form-group">
-        <Label>Turnaround time</Label>
-        <input type="number" class="form-control" th:field="*{turnaroundPeriod}" >
+        <Label for="turnaround">Turnaround time</Label>
+        <input id="turnaround" type="number" class="form-control" th:field="*{turnaroundPeriod}" >
     </div>
 
     <div class="form-row">

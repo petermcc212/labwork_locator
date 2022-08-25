@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en-GB">
 <head>
     <meta charset="UTF-8">
     <title>Patient profile</title>
     <div th:replace="~{fragments/global-bootstrap :: bootstrap}">Bootstrap</div>
-    <div th:replace="~{fragments/header :: header}">Header</div>
 </head>
 <body>
+<div class="container">
+    <div class="row">
+        <div class="col-12" >
+            <div th:replace="~{fragments/header :: header}">Header</div>
+        </div>
+    </div>
+</div>
 <h1>Patient profile</h1>
 <form action="#" th:action="@{/processNewPatient}" th:object="${patient}" method="post">
 
@@ -25,14 +32,14 @@
         <Label>Last Name</Label>
         <input type="text" class="form-control" th:field="*{lastName}"  th:readonly="true">
     </div>
-    <!-- ----------------------- DATE ------------------------------------>
+    <!--Date -->
     <div class="form-group">
         <label>Date of birth</label>
         <input type="date" class="form-control"  th:field="*{dateOfBirth}" th:readonly="true">
     </div>
 
 
-    <!-- ----------------------- Clinician ------------------------------------>
+    <!-- Clinician -->
     <div class="form-group">
         <label>Treating clinician</label>
 

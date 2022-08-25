@@ -1,9 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="header"
      xmlns:sec="http://www.w3.org/1999/xhtml">
-    <! --THYMELEAF -->
-    <html xmlns="http://www.w3.org/1999/xhtml"
-          xmlns:th="http://www.thymeleaf.org"
-          xmlns:sec="http://www.thymeleaf.org/extras/spring-security"></html>
+
+
 
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Prosthetics Locator</a>
@@ -16,28 +14,28 @@
                     <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownLabwork" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Labwork
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownLabwork">
                         <li><a class="nav-link" th:href="@{/selectPatient}">Add lab work </a></li>
                         <li><a class="nav-link" th:href="@{/viewAllLabWork}">View lab work </a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPatients" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Patients
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownPatients">
                         <li><a class="nav-link" th:href="@{/viewPatients}">View Patients </a></li>
                         <li><a class="nav-link" th:href="@{/addPatient}">Add patient </a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPractice" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Practice
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownPractice">
                         <li><a class="nav-link" th:href="@{/showClinicians}">View Clinicians </a></li>
                         <li><a class="nav-link" th:href="@{/showAllLaboratories}">View Labs </a></li>
                     </ul>
@@ -59,10 +57,10 @@
                     <a class="nav-link active" aria-current="page" sec:authorize="isAnonymous()" th:href="@{/login}"> Login </a>
                     <a class="nav-link active" aria-current="page" sec:authorize="!isAnonymous()" th:href="@{/logout}"> Logout </a>
                 </li>
-                <div class="nav-link active"  sec:authorize="!isAnonymous()">
-                    <label>User: </label>
-                    <label sec:authentication="name" ></label>
-                </div>
+<!--                <div class="nav-link active"  sec:authorize="!isAnonymous()">-->
+<!--                    <label>User: </label>-->
+<!--                    <label sec:authentication="name" ></label>-->
+<!--                </div>-->
 
             </ul>
             <form class="d-flex" th:action="@{/search}" method="get">

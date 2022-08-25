@@ -122,7 +122,7 @@ public class LaboratoryController {
         }catch (Exception e){
             e.printStackTrace();
         }
-        return "redirect:/";
+        return "redirect:/labServices/" + labService.getLaboratory().getId();
     }
 
 

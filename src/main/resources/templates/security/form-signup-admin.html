@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="en-GB">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign in page</title>
+  <title>Sign up admin</title>
   <link rel="stylesheet" type="text/css" href="/css/login.css">
   <div th:replace="~{fragments/global-bootstrap :: bootstrap}">Bootstrap</div>
-  <div th:replace="~{fragments/header :: header}">Header</div>
 </head>
 
 <body>
   <div class="container">
+
+      <div class="row">
+        <div class="col-12" >
+          <div th:replace="~{fragments/header :: header}">Header</div>
+        </div>
+      </div>
+
     <section class="jumbotron text-center">
       <div class="container">
         <h1>Labwork Locator</h1>
@@ -46,7 +53,6 @@
               <input type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password">
             </div>
 
-            <!-- ----------------------- ROLE ------------------------------------>
             <div class="form-group">
               <label>Role</label>
               <select name="role" class="form-control">

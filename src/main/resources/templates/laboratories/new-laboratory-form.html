@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en-GB">
 <head>
     <div th:replace="~{fragments/global-bootstrap :: bootstrap}">Bootstrap</div>
-    <div th:replace="~{fragments/header :: header}">Header</div>
+
     <meta charset="UTF-8">
     <title>Add a laboratory</title>
 </head>
 <body class="container">
+
+    <div class="row">
+        <div class="col-12" >
+            <div th:replace="~{fragments/header :: header}">Header</div>
+        </div>
+    </div>
 
     <div>
         <h1>Add a new laboratory</h1>
@@ -15,7 +22,7 @@
         <form action="#" th:action="@{/processNewLaboratory}" th:object="${laboratory}" method="post">
 
 
-            <!-- ----------------------- ID ------------------------------------>
+            <!--ID-->
 
             <div class="form-group">
                 <input type="hidden" class="form=control" th:field="*{id}">
@@ -23,19 +30,19 @@
 
 
             <div class="form-group">
-                <Label>Laboratory name</Label>
+                <Label for="labName">Laboratory name</Label>
                 <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
-                <input type="text" class="form-control" th:field="*{name}" >
+                <input id="labName" type="text" class="form-control" th:field="*{name}" >
             </div>
             <div class="form-group">
-                <Label>Address</Label>
+                <Label for="address">Address</Label>
                 <div style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></div>
-                <input type="text" class="form-control" th:field="*{address}" >
+                <input id="address" type="text" class="form-control" th:field="*{address}" >
             </div>
             <div class="form-group">
-                <Label>Phone number</Label>
+                <Label for="phoneNumber">Phone number</Label>
                 <div style="color: red" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></div>
-                <input type="text" class="form-control" th:field="*{phoneNumber}" >
+                <input id="phoneNumber" type="text" class="form-control" th:field="*{phoneNumber}" >
             </div>
 
             <div>

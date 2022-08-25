@@ -1,13 +1,22 @@
 <!DOCTYPE html>
+
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en-GB">
 <head>
     <meta charset="UTF-8">
     <div th:replace="~{fragments/global-bootstrap :: bootstrap}">Bootstrap</div>
-    <title>Patient's lab work </title>
-    <div th:replace="~{fragments/header :: header}">Header</div>
+    <title>Clinicians lab work</title>
 </head>
 <body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12" >
+            <div th:replace="~{fragments/header :: header}">Header</div>
+        </div>
+    </div>
+</div>
 
 <h1>List of patient lab work</h1>
 <table class="table table-hover" th:if="${!prostheisList.empty}">
@@ -31,7 +40,6 @@
         <td th:text="${item.clinician.getFirstName()}"></td>
         <td th:text="${item.notes}"></td>
 
-        </td>
     </tr>
     </tbody>
 </table>

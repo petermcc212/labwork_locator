@@ -1,39 +1,44 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en-GB">
 <head>
     <meta charset="UTF-8">
-    <title>New Prosthetic</title>
+    <title>Edit prosthesis</title>
     <div th:replace="~{fragments/global-bootstrap :: bootstrap}">Bootstrap</div>
-    <div th:replace="~{fragments/header :: header}">Header</div>
 </head>
 <body>
+<div class="container">
+    <div class="row">
+        <div class="col-12" >
+            <div th:replace="~{fragments/header :: header}">Header</div>
+        </div>
+    </div>
+</div>
 <h1>Edit lab tab</h1>
-<!-- ----------------------- ID ------------------------------------>
+<!--ID -->
 
 <form action="#" th:action="@{/processLabWork}" th:object="${prosthesis}" method="post">
 
     <div class="form-group">
         <input type="hidden" class="form=control" th:field="*{id}">
     </div>
-    <!-- ----------------------- LABORATORY  ------------------------------------>
+    <!--Laboratory -->
 
     <div class="form-group">
-        <label>Laboratory</label>
-        <select class="form-control" th:field="*{laboratory.id}">
+        <label for="laboratory">Laboratory</label>
+        <select id="laboratory" class="form-control" th:field="*{laboratory.id}">
             <option th:each="laboratory : ${laboratories}"
                     th:value="${laboratory.id}"
                     th:text="${laboratory.name}">
             </option>
         </select>
     </div>
-    <!-- ----------------------- DENTIST ------------------------------------>
+    <!--Dentist -->
+
     <div class="form-group">
-        <input type="hidden" class="form=control" th:field="*{id}">
-    </div>
-    <div class="form-group">
-        <label>Clinician</label>
-        <select class="form-control" th:field="*{clinician.id}">
+        <label for="clinician">Clinician</label>
+        <select id="clinician" class="form-control" th:field="*{clinician.id}">
             <option th:each="clinician : ${clinician}"
                     th:value="${clinician.id}"
                     th:text="${clinician.firstName}">
@@ -41,14 +46,11 @@
         </select>
     </div>
 
-    <!-- ----------------------- PATIENT------------------------------------>
+    <!--Patient -->
 
     <div class="form-group">
-        <input type="hidden" class="form=control" th:field="*{id}">
-    </div>
-    <div class="form-group">
-        <label>Patient</label>
-        <select class="form-control" th:field="*{patient.id}">
+        <label for="patient">Patient</label>
+        <select id="patient" class="form-control" th:field="*{patient.id}">
             <option th:each="patient : ${patient}"
                     th:value="${patient.id}"
                     th:text="${patient.firstName}">
@@ -56,16 +58,16 @@
         </select>
     </div>
 
-    <!-- ----------------------- DATE ------------------------------------>
+    <!--Date -->
     <div class="form-group">
-        <label>Date due</label>
-        <input type="date" class="form-control"  th:field="*{dateDue}">
+        <label for="date">Date due</label>
+        <input id="date" type="date" class="form-control"  th:field="*{dateDue}">
     </div>
 
-    <!-- ----------------------- STATUS ------------------------------------>
+    <!--Status -->
     <div class="form-group">
-        <label>Status</label>
-        <select name="status" class="form-control">
+        <label for="status">Status</label>
+        <select id="status" name="status" class="form-control">
             <option th:each="status : ${T(com.mccreadie.springlabworklocator.model.Prosthesis.Pros_type).values()}"
                     th:value="${status}"
                     th:text="${status}"
@@ -73,11 +75,11 @@
         </select>
     </div>
 
-    <!-- ----------------------- NOTES ------------------------------------>
+    <!--Notes -->
 
     <div class="form-group">
-        <Label>Additional notes</Label>
-        <input type="text" class="form-control" th:field="*{notes}" >
+        <Label for="notes">Additional notes</Label>
+        <input id="notes" type="text" class="form-control" th:field="*{notes}" >
     </div>
 
 
@@ -90,7 +92,6 @@
         </div>
     </div>
 </form>
-</div>
 
 </body>
 </html>
