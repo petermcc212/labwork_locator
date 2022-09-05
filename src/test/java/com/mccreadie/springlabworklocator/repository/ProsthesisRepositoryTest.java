@@ -8,9 +8,11 @@ import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.TestPropertySource;
 
@@ -20,7 +22,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 
 @DataJpaTest
@@ -46,6 +51,27 @@ class ProsthesisRepositoryTest {
         for(Prosthesis p : toDelete){
             prosthesisRepository.delete(p);
         }
+    }
+
+    // IT04 - save a prosthesis
+    @Test
+    void saveProsthesisTest() {
+        // Create a new prosthesis due today
+        Prosthesis prosthesis = new Prosthesis();
+        LocalDate currentDate = LocalDate.now();
+        prosthesis.setDateDue(currentDate);
+        prosthesis.setStatus(Prosthesis.Pros_type.SENT);
+
+        // Testing save functionality
+
+        Prosthesis savedProsthesis = prosthesisRepository.save(prosthesis);
+
+        // verify output
+        assertThat(savedProsthesis).isNotNull();
+        assertThat(savedProsthesis.getId()).isGreaterThan(0);
+        assertThat(savedProsthesis.getDateDue()).isEqualTo(currentDate);
+        // clear the database
+        prosthesisRepository.deleteAll();
     }
 
     /*

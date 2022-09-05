@@ -1,6 +1,7 @@
 package com.mccreadie.springlabworklocator.repository;
 
 import com.mccreadie.springlabworklocator.model.Patient;
+import com.mccreadie.springlabworklocator.model.PatientTest;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @Transactional
@@ -30,6 +32,36 @@ class PatientRepositoryTest {
 
     @Autowired
     private PatientRepository patientRepository;
+
+
+//    IT03
+    @Test
+    void testPatientSaves() {
+
+        // Create a new patient
+        Patient patient = new Patient();
+        // First name, last name and date of birth cannot be null
+        // and so values are set
+        patient.setFirstName("First");
+        patient.setLastName("Last");
+        Date date = new Date();
+        patient.setDateOfBirth(date);
+
+        // Testing save functionality
+        Patient savedPatient = patientRepository.save(patient);
+
+        // verify output
+        assertThat(savedPatient).isNotNull();
+        assertThat(savedPatient.getId()).isGreaterThan(0);
+        assertThat(savedPatient.getFirstName()).isEqualTo("First");
+        assertThat(savedPatient.getLastName()).isEqualTo("Last");
+        assertThat(savedPatient.getDateOfBirth()).isEqualTo(date);
+
+
+    }
+
+
+
 
 
     @Test

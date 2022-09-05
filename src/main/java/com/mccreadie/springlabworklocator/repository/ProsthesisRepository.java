@@ -39,4 +39,5 @@ public interface ProsthesisRepository extends JpaRepository<Prosthesis, Integer>
     List<Prosthesis> findOverdueWork(@Param("todaysDate") LocalDate todaysDate);
 
 
+
 }

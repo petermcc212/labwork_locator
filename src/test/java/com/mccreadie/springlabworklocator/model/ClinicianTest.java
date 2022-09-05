@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ClinicianTest {
 
 
-    @Test
+    @Test // UT01
     public void createClinicianTest(){
         Clinician clinician = new Clinician();
         assertNotEquals(clinician, null);

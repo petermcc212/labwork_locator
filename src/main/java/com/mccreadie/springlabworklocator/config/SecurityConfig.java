@@ -47,11 +47,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/addProsthetic/*", "/addPatient", "/addPatientDuringProsthesisCreation",
                                         "/processNewPatientFromNewProsthesis", "/processNewPatient")
                     .hasAnyRole("CLINICIAN", "ADMIN")
-                .antMatchers("/addClinician", "/processNewClinician", "/editClinicianDetails/*", "/addLaboratory",
-                                        "/processNewLaboratory", "/signup", "/processSignup",
-                        "/addReceptionist", "/addAdministrator", "editLaboratory/*")
-                    .hasAnyRole("ADMIN")
-                .anyRequest().denyAll()
+//                .antMatchers("/addClinician", "/processNewClinician", "/editClinicianDetails/*", "/addLaboratory",
+//                                        "/processNewLaboratory", "/signup", "/processSignup",
+//                        "/addReceptionist", "/addAdministrator", "editLaboratory/*")
+//                    .hasAnyRole("ADMIN")
+//                .anyRequest().denyAll()
                 .and()
                     .formLogin()
                         .loginPage("/login")

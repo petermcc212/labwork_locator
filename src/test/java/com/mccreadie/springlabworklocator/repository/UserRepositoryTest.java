@@ -41,6 +41,7 @@ class UserRepositoryTest {
     }
 
 
+    // IT01
     @Test
     void existsByLoginTrue() {
         User user = new User();

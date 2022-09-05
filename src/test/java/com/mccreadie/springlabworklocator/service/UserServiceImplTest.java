@@ -1,6 +1,7 @@
 package com.mccreadie.springlabworklocator.service;
 
 import com.mccreadie.springlabworklocator.controller.ClinicianController;
+import com.mccreadie.springlabworklocator.model.Role;
 import com.mccreadie.springlabworklocator.model.User;
 import com.mccreadie.springlabworklocator.repository.RoleRepository;
 import com.mccreadie.springlabworklocator.repository.UserRepository;
@@ -54,6 +55,7 @@ class UserServiceImplTest {
         user.setId(1);
         user.setLogin("testName");
         user.setPassword("password");
+
 
 
         assertFalse(user.isEnabled());

@@ -30,7 +30,6 @@ public class Prosthesis implements Comparable<Prosthesis>{
     private Patient patient;
     private String notes;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @FutureOrPresent
     @NotNull
     private LocalDate dateDue;
     private Date creationDate;
