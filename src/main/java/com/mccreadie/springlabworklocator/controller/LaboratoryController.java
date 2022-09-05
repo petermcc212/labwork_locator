@@ -1,8 +1,6 @@
 package com.mccreadie.springlabworklocator.controller;
 
 import com.mccreadie.springlabworklocator.model.Laboratory;
-import com.mccreadie.springlabworklocator.model.LaboratoryProduct;
-import com.mccreadie.springlabworklocator.service.LaboratoryProductService;
 import com.mccreadie.springlabworklocator.service.LaboratoryService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,12 +19,10 @@ import java.util.List;
 public class LaboratoryController {
 
     private final LaboratoryService laboratoryService;
-    private final LaboratoryProductService laboratoryProductService;
 
-    public LaboratoryController(LaboratoryService laboratoryService,
-                                LaboratoryProductService laboratoryProductService) {
+    public LaboratoryController(LaboratoryService laboratoryService) {
         this.laboratoryService = laboratoryService;
-        this.laboratoryProductService = laboratoryProductService;
+
     }
 
     @GetMapping("/addLaboratory")
@@ -74,56 +70,8 @@ public class LaboratoryController {
 
     }
 
-    @GetMapping("/labServices/{laboratoryId}")
-    public String labServices(@PathVariable int laboratoryId, Model model){
-        Laboratory laboratory = laboratoryService.getById(laboratoryId);
 
 
-        List<LaboratoryProduct> laboratoryProducts =
-                laboratoryProductService.getAll();
-        List<LaboratoryProduct> filteredLaboratoryProducts = new ArrayList<>();
-
-        // Return only products of current lab
-        for(LaboratoryProduct product : laboratoryProducts){
-            if(product.getLaboratory().getId() == laboratoryId){
-                filteredLaboratoryProducts.add(product);
-            }
-        }
-
-        System.out.println("SIZE OF LIST IS " + laboratoryProducts.size());
-
-        model.addAttribute("laboratory", laboratory);
-        model.addAttribute("laboratoryProducts", filteredLaboratoryProducts);
-        return "laboratories/laboratory-services";
-    }
-
-    @GetMapping("/addLabService/{laboratoryId}")
-    public String addLabService(@PathVariable int laboratoryId, Model model){
-        Laboratory laboratory = laboratoryService.getById(laboratoryId);
-
-
-        model.addAttribute("laboratory", laboratory);
-        model.addAttribute("labService", new LaboratoryProduct());
-
-
-        return "laboratories/new-laboratory-service-form";
-    }
-
-    @PostMapping("/processNewService")
-    public String processNewService(@Valid @ModelAttribute LaboratoryProduct labService ,
-                                    BindingResult bindingResult, Model model)
-    {
-        if(bindingResult.hasErrors()){
-            // HANDLE ERRORS HERE
-        }
-        try{
-            laboratoryProductService.save(labService);
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return "redirect:/labServices/" + labService.getLaboratory().getId();
-    }
 
 
 
