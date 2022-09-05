@@ -25,7 +25,7 @@ public class AuthenticationTest {
     private MockMvc mockMvc;
 
 
-    // IT08 FR24
+    // IT07 FR24
     // test administrator access
     @Test
     @WithMockUser(username = "admin", password = "admin", roles = "ADMIN")
@@ -37,7 +37,7 @@ public class AuthenticationTest {
 
 
 
-    // IT09 FR24
+    // IT08 FR24
     // test clinician access
     @Test
     @WithMockUser(username = "clinician", password = "clinician", roles = "CLINICIAN")
@@ -47,7 +47,7 @@ public class AuthenticationTest {
                 .andExpect(status().isOk());
     }
 
-    // IT10 FR24
+    // IT09 FR24
     // test receptionist access
     @Test
     @WithMockUser(username = "receptionist", password = "receptionist", roles = "RECEPTIONIST")
@@ -57,14 +57,14 @@ public class AuthenticationTest {
                 .andExpect(status().isOk());
     }
 
-    // IT11 FR25
+    // IT10 FR25
     // Unauthorised login
     @Test
     public void unauthorisedAccessTest() throws Exception {
         this.mockMvc.perform(get("/")).andExpect(redirectedUrlPattern("**/login"));
     }
 
-    //IT12 FR26
+    //IT11 FR26
     @Test
     @WithMockUser(username = "admin", password = "admin", roles = "ADMIN")
     public void logoutTest() throws Exception {

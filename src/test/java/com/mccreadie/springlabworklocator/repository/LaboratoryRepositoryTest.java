@@ -20,9 +20,9 @@ public class LaboratoryRepositoryTest {
     @Autowired
     private LaboratoryRepository laboratoryRepository;
 
-    //IT05 FR6
+    //IT04 FR6
     @Test
-    void saveLaboratory(){
+    void saveLaboratoryTest(){
         // Create new laboratory
         Laboratory laboratory = new Laboratory();
         laboratory.setName("testLab");

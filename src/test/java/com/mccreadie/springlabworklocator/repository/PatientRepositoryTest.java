@@ -1,12 +1,10 @@
 package com.mccreadie.springlabworklocator.repository;
 
 import com.mccreadie.springlabworklocator.model.Patient;
-import com.mccreadie.springlabworklocator.model.PatientTest;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureDataJpa;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.TestPropertySource;
 
@@ -16,7 +14,6 @@ import java.util.Date;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @Transactional
 @DataJpaTest
@@ -34,9 +31,9 @@ class PatientRepositoryTest {
     private PatientRepository patientRepository;
 
 
-//    IT03 FR9
+//    IT02 FR9
     @Test
-    void testPatientSaves() {
+    void savePatientTest() {
 
         // Create a new patient
         Patient patient = new Patient();

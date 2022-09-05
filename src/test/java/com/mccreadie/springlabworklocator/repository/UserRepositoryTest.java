@@ -1,6 +1,5 @@
 package com.mccreadie.springlabworklocator.repository;
 
-import com.mccreadie.springlabworklocator.model.Prosthesis;
 import com.mccreadie.springlabworklocator.model.Role;
 import com.mccreadie.springlabworklocator.model.User;
 import org.junit.Assert;
@@ -12,8 +11,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.TestPropertySource;
 
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 @TestPropertySource(properties = {
@@ -46,7 +43,7 @@ class UserRepositoryTest {
 
     // IT01 FR2 FR3
     @Test
-    void existsByLoginTrue() {
+    void existsByLoginTest() {
         // test administrator
         User administrator = new User();
         administrator.setLogin("admin");

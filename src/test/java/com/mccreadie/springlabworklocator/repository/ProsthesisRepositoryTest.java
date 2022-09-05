@@ -43,7 +43,7 @@ class ProsthesisRepositoryTest {
         }
     }
 
-    // IT04 FR12
+    // IT03 FR12
     @Test
     void saveProsthesisTest() {
         // Create a new prosthesis due today
@@ -86,7 +86,7 @@ class ProsthesisRepositoryTest {
 
 
 
-    //IT06 FR22
+    //IT05 FR22
     @Test
     void dueProsthesisTest() {
         // Create a new prosthesis due today
@@ -108,7 +108,7 @@ class ProsthesisRepositoryTest {
         prosthesisRepository.deleteAll();
     }
 
-    //IT07
+    //IT06 FR22
     @Test
     void findWorkDueTomorrow() {
         // Create a new prosthesis due tomorrow
