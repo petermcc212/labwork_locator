@@ -20,24 +20,22 @@ public class LaboratoryRepositoryTest {
     @Autowired
     private LaboratoryRepository laboratoryRepository;
 
-    //IT05
+    //IT05 FR6
     @Test
     void saveLaboratory(){
+        // Create new laboratory
         Laboratory laboratory = new Laboratory();
         laboratory.setName("testLab");
         laboratory.setAddress("testAddress");
-        laboratory.setPhoneNumber("07917450638");
-        laboratoryRepository.save(laboratory);
-
+        laboratory.setPhoneNumber("0800454787");
         // Testing save functionality
-//        Laboratory savedLaboratory = laboratoryRepository.save(laboratory);
-
+        Laboratory savedLaboratory = laboratoryRepository.save(laboratory);
         // verify output
-//        assertThat(savedLaboratory).isNotNull();
-//        assertThat(savedLaboratory.getId()).isGreaterThan(0);
-//        assertThat(savedLaboratory.getName()).isEqualTo("testLab");
-//        assertThat(savedLaboratory.getAddress()).isEqualTo("testAddress");
-//        assertThat(savedLaboratory.getPhoneNumber()).isEqualTo("0800454787");
+        assertThat(savedLaboratory).isNotNull();
+        assertThat(savedLaboratory.getId()).isGreaterThan(0);
+        assertThat(savedLaboratory.getName()).isEqualTo("testLab");
+        assertThat(savedLaboratory.getAddress()).isEqualTo("testAddress");
+        assertThat(savedLaboratory.getPhoneNumber()).isEqualTo("0800454787");
     }
 
 

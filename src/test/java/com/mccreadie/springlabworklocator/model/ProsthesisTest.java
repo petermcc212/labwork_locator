@@ -8,7 +8,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.security.core.parameters.P;
 
 import java.time.LocalDate;
+import java.util.Date;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ProsthesisTest {
@@ -28,7 +30,28 @@ class ProsthesisTest {
     void compareTo() {
     }
 
-    @Test // U04 create  prosthesis
+//    U06 FR18
+    @Test
+    public void updateProsthesisStatusTest(){
+        // check SENT status
+        prosthesis.setStatus(Prosthesis.Pros_type.SENT);
+        assertThat(prosthesis.getStatus()).isEqualTo(Prosthesis.Pros_type.SENT);
+        // check COMPLETED status
+        prosthesis.setStatus(Prosthesis.Pros_type.COMPLETED);
+        assertThat(prosthesis.getStatus()).isEqualTo(Prosthesis.Pros_type.COMPLETED);
+        // check REQUIRES_ATTENTION status
+        prosthesis.setStatus(Prosthesis.Pros_type.REQUIRES_ATTENTION);
+        assertThat(prosthesis.getStatus()).isEqualTo(Prosthesis.Pros_type.REQUIRES_ATTENTION);
+        // check RETURNED status
+        prosthesis.setStatus(Prosthesis.Pros_type.RETURNED);
+        assertThat(prosthesis.getStatus()).isEqualTo(Prosthesis.Pros_type.RETURNED);
+        // check VOID status
+        prosthesis.setStatus(Prosthesis.Pros_type.VOID);
+        assertThat(prosthesis.getStatus()).isEqualTo(Prosthesis.Pros_type.VOID  );
+    }
+
+
+    @Test // U04 FR10, FR11
     public void createProsthesisTest(){
 
         assertNotEquals(prosthesis, null);
@@ -77,6 +100,37 @@ class ProsthesisTest {
         // test additional notes
         prosthesis.setNotes("Test note");
         assertEquals(prosthesis.getNotes(), "Test note");
+    }
+
+    // U07 FR19
+    @Test
+    public void updateProsthesisDetailsTest(){
+        // check the date
+        LocalDate dueDate = LocalDate.now();
+        prosthesis.setDateDue(dueDate);
+        assertThat(prosthesis.getDateDue()).isEqualTo(dueDate);
+        // change the date
+        dueDate = LocalDate.now().plusDays(10);
+        prosthesis.setDateDue(dueDate);
+        assertThat(prosthesis.getDateDue()).isEqualTo(dueDate);
+    }
+
+    // U08 //FR20
+    @Test
+    public void preventIllegalUpdateTest(){
+        // it must not be possible to update the patient once set
+        Patient firstPatient = new Patient();
+        prosthesis.setPatient(firstPatient);
+        Patient secondPatient = new Patient();
+        prosthesis.setPatient(secondPatient);
+        // check to ensure patient associated with prosthesis is still firstPatient
+        assertThat(prosthesis.getPatient()).isEqualTo(firstPatient);
+        // It must not be possible to update the clinician once set
+        Clinician firstClinician = new Clinician();
+        prosthesis.setClinician(firstClinician);
+        Clinician secondClinician = new Clinician();
+        prosthesis.setClinician(secondClinician);
+        assertThat(prosthesis.getClinician()).isEqualTo(firstClinician);
     }
 
 

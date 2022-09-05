@@ -1,6 +1,7 @@
 package com.mccreadie.springlabworklocator.repository;
 
 import com.mccreadie.springlabworklocator.model.Prosthesis;
+import com.mccreadie.springlabworklocator.model.Role;
 import com.mccreadie.springlabworklocator.model.User;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,6 +28,8 @@ class UserRepositoryTest {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private RoleRepository roleRepository;
 
 
 
@@ -41,15 +44,42 @@ class UserRepositoryTest {
     }
 
 
-    // IT01
+    // IT01 FR2 FR3
     @Test
     void existsByLoginTrue() {
-        User user = new User();
-        user.setLogin("user");
-        user.setPassword("password");
-        userRepository.save(user);
-
-        Assert.assertTrue(userRepository.existsByLogin("test"));
+        // test administrator
+        User administrator = new User();
+        administrator.setLogin("admin");
+        administrator.setPassword("password");
+        administrator.setRole("ADMIN");
+        Role adminRole = new Role();
+        adminRole.setLogin(administrator.getLogin());
+        adminRole.setRole(administrator.getRole());
+        roleRepository.save(adminRole);
+        userRepository.save(administrator);
+        Assert.assertTrue(userRepository.existsByLogin("admin"));
+        // test clinician
+        User clinician = new User();
+        clinician.setLogin("clinician");
+        clinician.setPassword("password");
+        clinician.setRole("CLINICIAN");
+        Role clinicianRole = new Role();
+        clinicianRole.setLogin(administrator.getLogin());
+        clinicianRole.setRole(administrator.getRole());
+        roleRepository.save(clinicianRole);
+        userRepository.save(clinician);
+        Assert.assertTrue(userRepository.existsByLogin("clinician"));
+        // Test receptionist
+        User receptionist = new User();
+        receptionist.setLogin("receptionist");
+        receptionist.setPassword("password");
+        receptionist.setRole("RECEPTIONIST");
+        Role receptionistRole = new Role();
+        receptionistRole.setLogin(receptionist.getLogin());
+        receptionistRole.setRole(receptionist.getRole());
+        roleRepository.save(receptionistRole);
+        userRepository.save(receptionist);
+        Assert.assertTrue(userRepository.existsByLogin("receptionist"));
     }
 
 

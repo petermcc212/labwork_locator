@@ -1,31 +1,19 @@
 package com.mccreadie.springlabworklocator.repository;
 
-import com.mccreadie.springlabworklocator.model.Patient;
 import com.mccreadie.springlabworklocator.model.Prosthesis;
-import net.bytebuddy.asm.Advice;
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.TestPropertySource;
 
-import javax.transaction.Transactional;
-
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
 
 
 @DataJpaTest
@@ -41,6 +29,8 @@ class ProsthesisRepositoryTest {
 
     @Autowired
     private ProsthesisRepository prosthesisRepository;
+    @Autowired
+    private PatientRepository patientRepository;
 
 
 
@@ -53,7 +43,7 @@ class ProsthesisRepositoryTest {
         }
     }
 
-    // IT04 - save a prosthesis
+    // IT04 FR12
     @Test
     void saveProsthesisTest() {
         // Create a new prosthesis due today
@@ -74,13 +64,31 @@ class ProsthesisRepositoryTest {
         prosthesisRepository.deleteAll();
     }
 
-    /*
-    T01
-    This test includes a prosthetic device which is due today
-    and so should assert true
-     */
+    //    IT05 FR21
     @Test
-    void findWorkDueTodayCorrectValue() {
+    void findOverdueWork() {
+        // Create a new prosthesis due yesterday
+        Prosthesis p1 = new Prosthesis();
+        p1.setDateDue(LocalDate.now().minusDays(10));
+        // Status must be sent
+        p1.setStatus(Prosthesis.Pros_type.SENT);
+        prosthesisRepository.save(p1);
+        // Create another new prosthesis due in 10 days
+        Prosthesis p2 = new Prosthesis();
+        p2.setDateDue(LocalDate.now().plusDays(10));
+        p2.setStatus(Prosthesis.Pros_type.SENT);
+        prosthesisRepository.save(p2);
+        // Query the repository to find work due today
+        List<Prosthesis> prosthesisListReturned = prosthesisRepository.findOverdueWork(LocalDate.now());
+        // Test to ensure only one item is returned as only one item is due today
+        Assert.assertEquals("Only one item overdue", 1, prosthesisListReturned.size());
+    }
+
+
+
+    //IT06 FR22
+    @Test
+    void dueProsthesisTest() {
         // Create a new prosthesis due today
         Prosthesis p1 = new Prosthesis();
         p1.setDateDue(LocalDate.now());
@@ -99,83 +107,8 @@ class ProsthesisRepositoryTest {
         Assert.assertEquals("Only one item due today", 1, prosthesisListReturned.size());
         prosthesisRepository.deleteAll();
     }
-        /*
-        T02
-        This test tests the borderline value for prosthetics due today. No prosthetic due
-        today but one due tomorrow
-        */
-    @Test
-    void findWorkDueTodayNoItemsDue() {
-        // Create a new prosthesis due today
-        Prosthesis p1 = new Prosthesis();
-        p1.setDateDue(LocalDate.now().plusDays(1));
-        // Status must be sent
-        p1.setStatus(Prosthesis.Pros_type.SENT);
-        prosthesisRepository.save(p1);
-        // Create another new prosthesis due in 10 days
-        Prosthesis p2 = new Prosthesis();
-        p2.setDateDue(LocalDate.now().plusDays(10));
-        p2.setStatus(Prosthesis.Pros_type.SENT);
-        prosthesisRepository.save(p2);
-        // Query the repository to find work due today
-        List<Prosthesis> prosthesisListReturned = prosthesisRepository.findWorkDueToday(LocalDate.now());
 
-        // Test to ensure only one item is returned as only one item is due today
-        Assert.assertEquals("No items due today", 0, prosthesisListReturned.size());
-    }
-
-    /*
-    T03
-    This test tests the borderline value for prosthetics due today. No prosthetic due
-    today but one due tomorrow
-    */
-    @Test
-    void findWorkDueTodayItemDueYesterday() {
-        // Create a new prosthesis due today
-        Prosthesis p1 = new Prosthesis();
-        p1.setDateDue(LocalDate.now().minusDays(1));
-        // Status must be sent
-        p1.setStatus(Prosthesis.Pros_type.SENT);
-        prosthesisRepository.save(p1);
-        // Create another new prosthesis due in 10 days
-        Prosthesis p2 = new Prosthesis();
-        p2.setDateDue(LocalDate.now().plusDays(10));
-        p2.setStatus(Prosthesis.Pros_type.SENT);
-        prosthesisRepository.save(p2);
-        // Query the repository to find work due today
-        List<Prosthesis> prosthesisListReturned = prosthesisRepository.findWorkDueToday(LocalDate.now());
-
-        // Test to ensure only one item is returned as only one item is due today
-        Assert.assertEquals("No items due today", 0, prosthesisListReturned.size());
-    }
-
-    /*
-    T04
-    This test tests the borderline value for prosthetics due today. No prosthetic due
-    today but one due yesterday
-    */
-    @Test
-    void findWorkDueYesterday() {
-        // Create a new prosthesis due today
-        Prosthesis p1 = new Prosthesis();
-        p1.setDateDue(LocalDate.now().minusDays(1));
-        // Status must be sent
-        p1.setStatus(Prosthesis.Pros_type.SENT);
-        prosthesisRepository.save(p1);
-        // Create another new prosthesis due in 10 days
-        Prosthesis p2 = new Prosthesis();
-        p2.setDateDue(LocalDate.now().plusDays(10));
-        p2.setStatus(Prosthesis.Pros_type.SENT);
-        prosthesisRepository.save(p2);
-        // Query the repository to find work due today
-        List<Prosthesis> prosthesisListReturned = prosthesisRepository.findWorkDueToday(LocalDate.now());
-
-        // Test to ensure only one item is returned as only one item is due today
-        Assert.assertEquals("No items due today", 0, prosthesisListReturned.size());
-    }
-
-
-
+    //IT07
     @Test
     void findWorkDueTomorrow() {
         // Create a new prosthesis due tomorrow
@@ -196,22 +129,6 @@ class ProsthesisRepositoryTest {
         Assert.assertEquals("Only one item due tomorrow", 1, prosthesisListReturned.size());
     }
 
-    @Test
-    void findOverdueWork() {
-        // Create a new prosthesis due yesterday
-        Prosthesis p1 = new Prosthesis();
-        p1.setDateDue(LocalDate.now().minusDays(10));
-        // Status must be sent
-        p1.setStatus(Prosthesis.Pros_type.SENT);
-        prosthesisRepository.save(p1);
-        // Create another new prosthesis due in 10 days
-        Prosthesis p2 = new Prosthesis();
-        p2.setDateDue(LocalDate.now().plusDays(10));
-        p2.setStatus(Prosthesis.Pros_type.SENT);
-        prosthesisRepository.save(p2);
-        // Query the repository to find work due today
-        List<Prosthesis> prosthesisListReturned = prosthesisRepository.findOverdueWork(LocalDate.now());
-        // Test to ensure only one item is returned as only one item is due today
-        Assert.assertEquals("Only one item overdue", 1, prosthesisListReturned.size());
-    }
+
+
 }

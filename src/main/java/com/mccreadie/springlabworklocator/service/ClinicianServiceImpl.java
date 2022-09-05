@@ -29,6 +29,7 @@ public class ClinicianServiceImpl implements ClinicianService{
         clinician.setEnabled(true);
         clinician.setPassword(PasswordEncoderFactories.createDelegatingPasswordEncoder().encode(clinician.getPassword()));
         try{
+            clinician.setRole("CLINICIAN");
             clinicianRepository.save(clinician);
         }
         catch(Exception e){
@@ -37,8 +38,15 @@ public class ClinicianServiceImpl implements ClinicianService{
 
         Role role = new Role();
         role.setLogin(clinician.getLogin());
+        System.out.println("The login is " + clinician.getLogin());
         role.setRole("ROLE_CLINICIAN");
         roleRepository.save(role);
+
+
+
+
+
+
 
     }
 

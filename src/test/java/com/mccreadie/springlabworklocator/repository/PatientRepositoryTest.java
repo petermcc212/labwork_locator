@@ -34,7 +34,7 @@ class PatientRepositoryTest {
     private PatientRepository patientRepository;
 
 
-//    IT03
+//    IT03 FR9
     @Test
     void testPatientSaves() {
 
@@ -56,8 +56,22 @@ class PatientRepositoryTest {
         assertThat(savedPatient.getFirstName()).isEqualTo("First");
         assertThat(savedPatient.getLastName()).isEqualTo("Last");
         assertThat(savedPatient.getDateOfBirth()).isEqualTo(date);
+    }
 
-
+    // IT05 FR13
+    @Test
+    void retrievePatientTest(){
+        // create patient and save patient
+        Patient patient = new Patient();
+        patient.setFirstName("first");
+        patient.setLastName("last");
+        patient.setDateOfBirth(new Date());
+        // retrieve the patient
+        Patient savedPatient = patientRepository.save(patient);
+        assertThat(savedPatient).isNotNull();
+        assertThat(savedPatient.getId()).isGreaterThan(0);
+        assertThat(savedPatient.getFirstName()).isEqualTo("first");
+        assertThat(savedPatient.getLastName()).isEqualTo("last");
     }
 
 

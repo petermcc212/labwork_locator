@@ -77,7 +77,11 @@ public class Prosthesis implements Comparable<Prosthesis>{
     }
 
     public void setClinician(Clinician clinician) {
-        this.clinician = clinician;
+        if(this.clinician == null){
+            this.clinician = clinician;
+        }else {
+            System.out.println("CLinician cannot be updated once set");
+        }
     }
 
     public Patient getPatient() {
@@ -85,7 +89,11 @@ public class Prosthesis implements Comparable<Prosthesis>{
     }
 
     public void setPatient(Patient patient) {
-        this.patient = patient;
+        if(this.patient == null){
+            this.patient = patient;
+        }else{
+            System.out.println("Patient cannot be updated once set");
+        }
     }
 
     public Date getCreationDate() {
