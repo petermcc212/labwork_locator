@@ -3,6 +3,7 @@ package com.mccreadie.springlabworklocator.controller;
 import com.mccreadie.springlabworklocator.model.Clinician;
 import com.mccreadie.springlabworklocator.model.Prosthesis;
 import com.mccreadie.springlabworklocator.service.ClinicianService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -39,6 +40,12 @@ public class ClinicianController {
         if(bindingResult.hasErrors()){
             return "clinician/new-clinician-form";
         }
+        System.out.println(clinician.getPassword());
+        if(!clinician.getPassword().contains("{bcrypt}")){
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            String encodedPassword = encoder.encode(clinician.getPassword());
+            clinician.setPassword(encodedPassword);
+        }
         clinicianService.createNewClinician(clinician);
         return "redirect:showClinicians";
     }
@@ -61,16 +68,5 @@ public class ClinicianController {
         model.addAttribute("prostheisList", prosthesisList);
         return "clinician/clinicians-lab-work";
     }
-
-    @Transactional
-    @GetMapping("/editClinicianDetails/{clinicianId}")
-    public String editClinicianDetails(@PathVariable int clinicianId, Model model){
-        Clinician theClinician = clinicianService.getById(clinicianId);
-        model.addAttribute("clinician", theClinician);
-        return "clinician/edit-clinician-form";
-
-    }
-
-
 
 }

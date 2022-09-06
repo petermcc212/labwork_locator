@@ -32,7 +32,6 @@
                 <td>Email</td>
                 <td>Phone number</td>
                 <td>Labwork List</td>
-                <td>Edit clinician</td>
 
             </tr>
             </thead>
@@ -43,7 +42,6 @@
                 <td th:text="${clinician.clinicianEmail}"></td>
                 <td th:text="${clinician.clinicianPhoneNumber}"></td>
                 <td><a class="btn btn-primary" th:href="@{/viewCliniciansLabWork/} + ${clinician.id}">View Lab work</a></td>
-                <td><a class="btn btn-primary" th:href="@{/editClinicianDetails/} + ${clinician.id}">Edit clinician details</a></td>
             </tr>
             </tbody>
         </table>
