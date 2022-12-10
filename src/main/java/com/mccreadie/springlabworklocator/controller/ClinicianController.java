@@ -40,12 +40,6 @@ public class ClinicianController {
         if(bindingResult.hasErrors()){
             return "clinician/new-clinician-form";
         }
-        System.out.println(clinician.getPassword());
-        if(!clinician.getPassword().contains("{bcrypt}")){
-            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-            String encodedPassword = encoder.encode(clinician.getPassword());
-            clinician.setPassword(encodedPassword);
-        }
         clinicianService.createNewClinician(clinician);
         return "redirect:showClinicians";
     }
